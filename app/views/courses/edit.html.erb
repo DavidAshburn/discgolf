@@ -1,14 +1,8 @@
-<h1>Editing course</h1>
+<br><br>
+<div class="p-3 mb-2 bg-success bg-gradient text-white fs-4" style="border-radius:15px">Edit Course</div>
 
 <%= render "form", course: @course %>
 
 <br>
 
-<div class="row pt-0">
-  <div class="col-1">
-    <%= link_to "Show this course", @course, class:"btn btn-outline-secondary" %>
-  </div>
-  <div class="col-1">
-    <%= link_to "Back to courses", courses_path, class:"btn btn-outline-dark"%>
-  </div>
-</div>
+<%= link_to "Course List", home_my_courses_path, class:"btn btn-outline-dark" %>

@@ -1,27 +1,11 @@
 <div class="px-4 py-5 my-0 text-center">
     <div class="row">
-      <div class="col-sm-2"><%= image_tag('disc.jpg', class: "d-block mx-auto mb-4", width: '90', height: '90') %></div>
-      <h1 class="display-3 fw-bold col-sm-4 mt-2"><%= current_user.email %></h1>
+      <div class="col-sm-2"><%= image_tag('disc.jpg', class: "d-block mx-auto mb-2", width: '90', height: '90') %></div>
+      <h1 class="display-6 fw-bold mt-3 col-sm-4 text-center"><%= current_user.email %></h1>
     </div>
-    
-    <h1 class="mt-4">Recent Cards</h1>
-    <table class="table">
-      <thead>
-        <th scope="col">Course</th>
-        <th scope="col">Par</th>
-        <th scope="col">Score</th>
-        <th scopt="col">Date</th>
-      </thead>
-      <tbody>
-        <%# loop through the players cards and add 4 recent rounds to table %>
-        <p>stuff here</p>
-        <p>stuff here</p>
-        <p>stuff here</p>
-      </tbody>
-    </table>
     <br>
     <% if @courses != nil %>
-      <h1 class="mt-4">My Courses</h1>
+      <div class="p-3 mb-2 bg-success bg-gradient text-white fs-4" style="border-radius:15px">My Courses</div>
       <table class="table my-2">
         <thead>
           <th scope="col">Name</th>
@@ -39,7 +23,23 @@
         </tbody>
       </table>
     <% end %>
+    <div class="p-3 mb-2 bg-success bg-gradient text-white fs-4" style="border-radius:15px">Recent Cards</div>
+    <table class="table">
+      <thead>
+        <th scope="col">Course</th>
+        <th scope="col">Par</th>
+        <th scope="col">Score</th>
+        <th scopt="col">Date</th>
+      </thead>
+      <tbody>
+        <%# loop through the players cards and add 4 recent rounds to table %>
+        <td>stuff here</td>
+        <td>stuff here</td>
+        <td>stuff here</td>
+        <td>stuff here</td>
+      </tbody>
+    </table>
     <p class="nav-item">
-      <%= link_to "Edit Profile", edit_user_registration_path, class:"btn btn-outline-dark" %>
+      <%= link_to "Edit Profile", edit_user_registration_path, class:"btn btn-outline-dark mt-4" %>
     </p>
 </div>

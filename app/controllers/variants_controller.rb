@@ -19,6 +19,7 @@ class VariantsController < ApplicationController
 
   # GET /variants/1/edit
   def edit
+    @course = Course.find(@variant.course_id)
   end
 
   # POST /variants or /variants.json
@@ -27,7 +28,8 @@ class VariantsController < ApplicationController
 
     respond_to do |format|
       if @variant.save
-        format.html { redirect_to variant_url(@variant), notice: "Variant was successfully created." }
+        course = Course.find(@variant.course_id)
+        format.html { redirect_to course, notice: "Variant was successfully created." }
         format.json { render :show, status: :created, location: @variant }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,9 +54,9 @@ class VariantsController < ApplicationController
   # DELETE /variants/1 or /variants/1.json
   def destroy
     @variant.destroy
-
+    course = Course.find(@variant.course_id)
     respond_to do |format|
-      format.html { redirect_to variants_url, notice: "Variant was successfully destroyed." }
+      format.html { redirect_to course, notice: "Variant was successfully destroyed." }
       format.json { head :no_content }
     end
   end
