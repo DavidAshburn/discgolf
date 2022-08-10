@@ -1,14 +1,6 @@
 class VariantsController < ApplicationController
   before_action :set_variant, only: %i[ show edit update destroy ]
 
-  def course
-    return Course.find(@variant.course_id).name
-  end
-
-  def title
-    return @variant.name
-  end
-
   # GET /variants or /variants.json
   def index
     @variants = Variant.all
