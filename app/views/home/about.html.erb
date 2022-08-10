@@ -1,0 +1,17 @@
+<div class="px-4 pt-5 my-5 text-center border-bottom">
+    <h1 class="display-4 fw-bold mb-3">Huck Can Help</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">It doesn't matter how long your disc is if you can't get it in. Coach Huck will help you dominate the basket, your game, and even a bucket of wings if you order in front of him.</p>
+      <p class="lead mb-4">Track your accuracy and get personal recommendations on training and disc selection. </p>
+      <p class="lead mb-5">You've got to get angry! Get mean!</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+        <%= link_to "Coach's Unneccessary Twitter", "https://twitter.com/Coach", type: "button", class:"btn btn-primary btn-lg px-4" %>
+        <%= link_to "Play a Round", new_user_registration_path, type: "button", class:"btn btn-outline-secondary btn-lg px-4" %>
+      </div>
+    </div>
+    <div class="overflow-hidden" style="max-height: 30vh;">
+      <div class="container px-5">
+        <%= image_tag("patches.jpg", class: "img-fluid border rounded-3 shadow-lg mb-4", width: '292', alt: "A gawd-dam champion", loading: "lazy") %>
+      </div>
+    </div>
+</div>

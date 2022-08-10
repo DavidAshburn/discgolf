@@ -1,0 +1,53 @@
+<%= form_with(model: variant) do |form| %>
+  <% if variant.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(variant.errors.count, "error") %> prohibited this variant from being saved:</h2>
+
+      <ul>
+        <% variant.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-8">
+    <div class="row, pt-1">
+      <%= form.text_field :name, class:"form-control", placeholder:"Variant Name" %>
+    </div>
+    <div class="row, pt-1">
+      <%= form.text_field :one, class:"form-control", placeholder:"3" %>
+    </div>
+    <div class="row, pt-1">
+      <%= form.text_field :two, class:"form-control", placeholder:"3" %>
+    </div>
+    <div class="row, pt-1">
+      <%= form.text_field :three, class:"form-control", placeholder:"3" %>
+    </div>
+    <div class="row, pt-1">
+      <%= form.text_field :four, class:"form-control", placeholder:"3" %>
+    </div>
+    <div class="row, pt-1">
+      <%= form.text_field :five, class:"form-control", placeholder:"3" %>
+    </div>
+    <div class="row, pt-1">
+      <%= form.text_field :six, class:"form-control", placeholder:"3" %>
+    </div>
+    <div class="row, pt-1">
+      <%= form.text_field :seven, class:"form-control", placeholder:"3" %>
+    </div>
+    <div class="row, pt-1">
+      <%= form.text_field :eight, class:"form-control", placeholder:"3" %>
+    </div>
+    <div class="row, pt-1">
+      <%= form.text_field :nine, class:"form-control", placeholder:"3" %>
+    </div>
+    <div class="row, pt-1">
+      <%= form.number_field :course_id, id: :variant_course_id, class:"form-control", value:course_id, type: :hidden %>
+    </div>
+
+    <div class="row, pt-4">
+      <%= form.submit class:"btn btn-success" %>
+    </div>
+  </div>
+<% end %>

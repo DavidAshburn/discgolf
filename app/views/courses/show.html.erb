@@ -1,0 +1,51 @@
+<div class="card w-80">
+  <h5 class="card-header"><%= @course.name %></h5>
+  <div class="card-body">
+    <h5 class="card-title"><%= " #{@course.city}, #{@course.state} " %></h5>
+    <h5 class="card-title"><%= " #{@course.user_id} " %></h5>
+
+    <table class="table table-striped table-hover w-auto">
+      <thead scope;="row" style="background-color: #11d47c;">
+        <tr>
+          <th scope="col" class="text-white">Variant</th>
+          <th scope="col" class="text-white">1</th>
+          <th scope="col" class="text-white">2</th>
+          <th scope="col" class="text-white">3</th>
+          <th scope="col" class="text-white">4</th>
+          <th scope="col" class="text-white">5</th>
+          <th scope="col" class="text-white">6</th>
+          <th scope="col" class="text-white">7</th>
+          <th scope="col" class="text-white">8</th>
+          <th scope="col" class="text-white">9</th>           
+        </tr>
+      </thead>
+      <tbody>
+      <% @variants.each do |variant| %>
+        <tr>
+          <td><%= link_to variant.name, variant, class:"btn btn-success" %></td>
+          <td><%= variant.one %></td>
+          <td><%= variant.two %></td>
+          <td><%= variant.three %></td>
+          <td><%= variant.four %></td>
+          <td><%= variant.five %></td>
+          <td><%= variant.six %></td>
+          <td><%= variant.seven %></td>
+          <td><%= variant.eight %></td>
+          <td><%= variant.nine %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <div class="row mt-3">
+      <div class="col-sm-9">
+        <%= link_to "Add a Variant", new_variant_path(:course_id => @course.id), class:"btn btn-outline-dark mb-3" %>
+        <%= link_to "Edit this course", edit_course_path, class:"btn btn-outline-primary mb-3" %>
+        <%= link_to "Course list", courses_path, class:"btn btn-outline-dark mb-3" %>
+      </div>
+      <div class="col align-self-end">
+        <%= button_to "Delete this course", @course, method: :delete, class:"btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>

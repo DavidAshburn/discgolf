@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  one: MyString
+  two: MyString
+  three: MyString
+  four: MyString
+  five: MyString
+  six: MyString
+  seven: MyString
+  eight: MyString
+  nine: MyString
+  course_id: 1
+
+two:
+  name: MyString
+  one: MyString
+  two: MyString
+  three: MyString
+  four: MyString
+  five: MyString
+  six: MyString
+  seven: MyString
+  eight: MyString
+  nine: MyString
+  course_id: 1
