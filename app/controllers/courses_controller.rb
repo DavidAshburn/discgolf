@@ -8,7 +8,6 @@
 
   # GET /courses/1 or /courses/1.json
   def show
-    @variants = @course.variants
   end
 
   # GET /courses/new
