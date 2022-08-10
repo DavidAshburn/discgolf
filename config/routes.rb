@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   resources :cards
   resources :variants
   resources :courses
@@ -7,8 +8,6 @@ Rails.application.routes.draw do
   get 'home/about'
   get 'home/profile'
   get 'home/my_courses'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get 'play/scorecard'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

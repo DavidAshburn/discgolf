@@ -1,0 +1,72 @@
+<br><br>
+<div class="card text-center">
+  <div class="card-header">
+    <%= "#{Course.find_by(id: @variant.course_id).name}" %>
+  </div>
+  <div class="card-body">
+  	<div class="row mb-2">
+    	<h5 class="card-title"> <%= "#{@variant.name}" %></h5>
+    </div>
+    <div class="row mb-2">
+    	<div class="col-4">
+    		<p class="par">
+    			Par: 1
+    		</p>
+    	</div>
+    	<div class="col-4">
+    		<p class="hole">
+    			Hole: 2
+    		</p>
+    	</div>
+    	<div class="col-4">
+    		<p class="score">
+    			Score: 3
+    		</p>
+    	</div>
+    </div>
+
+    <div class="container-sm">
+    	<div class="row mb-1">
+	    	<div class="btn-group" role="group" aria-label="Basic example">
+	  			<button type="button" class="btn btn-primary bg-gradient">1</button>
+	  			<button type="button" class="btn btn-primary bg-gradient">2</button>
+	  			<button type="button" class="btn btn-primary bg-gradient">3</button>
+			</div>
+		</div>
+		<div class="row mb-1">
+	    	<div class="btn-group" role="group" aria-label="Basic example">
+	  			<button type="button" class="btn btn-primary bg-gradient">4</button>
+	  			<button type="button" class="btn btn-primary bg-gradient">5</button>
+	  			<button type="button" class="btn btn-primary bg-gradient">6</button>
+			</div>
+		</div>
+		<div class="row">
+	    	<div class="btn-group" role="group" aria-label="Basic example">
+	  			<button type="button" class="btn btn-primary bg-gradient">7</button>
+	  			<button type="button" class="btn btn-primary bg-gradient">8</button>
+	  			<button type="button" class="btn btn-primary bg-gradient">9</button>
+			</div>
+		</div>
+    </div>
+  </div>
+  <div class="card-footer text-muted">
+  	<div class="row mb-4">
+	    <div class="btn-group" role="group" aria-label="Basic example">
+  			<button type="button" class="btn btn-primary bg-gradient">Drive</button>
+  			<button type="button" class="btn btn-secondary bg-gradient">Mid</button>
+  			<button type="button" class="btn btn-info bg-gradient">Putt</button>
+  			<button type="button" class="btn btn-warning bg-gradient">Fault</button>
+		</div>
+	</div>
+	<div class="table-group-divider align-items-center"></div>
+	<br>
+	<div class="row">
+	   	<div class="btn-group" role="group" aria-label="Basic example">
+  			<button type="button" class="btn btn-secondary bg-gradient">Last</button>
+  			<button type="button" class="btn btn-primary bg-gradient">Card</button>
+  			<button type="button" class="btn btn-success bg-gradient">Next</button>
+		</div>
+	</div>
+  </div>
+</div>
+

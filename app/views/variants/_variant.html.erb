@@ -1,6 +1,6 @@
 <table>
 <tr>
-  <td><%= link_to variant.name, variant, class:"link-secondary" %></td>
+  <td><%= link_to "Play #{variant.name}", play_scorecard_path( variant_id: variant.id ), class:"link-secondary" %></td>
   <td><%= variant.one %></td>
   <td><%= variant.two %></td>
   <td><%= variant.three %></td>

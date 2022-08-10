@@ -9,6 +9,14 @@
 	Bootstrap CSS rails installation | --css=bootstrap |
 	Devise for Authentication | gem |
 
+	"@hotwired/stimulus": "^3.1.0",
+    "@hotwired/turbo-rails": "^7.1.3",
+    "@popperjs/core": "^2.11.5",
+    "bootstrap": "^5.2.0",
+    "bootstrap-icons": "^1.9.1",
+    "esbuild": "^0.14.54",
+    "sass": "^1.54.3"
+    
 * Configuration
 
 	#Turbostream needs to be accepted as a nav format in the Devise initializer
@@ -39,6 +47,9 @@
 		?look into environment variables, for user pass and db location
 		?not sure if this matters since there will only be one instance of this application
 
+	#git-ignore
+
+		?app/assets/builds
 
 * Database creation
 	SQLite3 in Development/Testing
