@@ -20,19 +20,26 @@
       </tbody>
     </table>
     <br>
-    <h1 class="mt-4">My Courses</h1>
-    <table class="table my-2">
-      <thead>
-        <th scope="col">Name</th>
-      </thead>
-      <tbody>
-        <%# top three most played courses %>
-        <p>stuff here</p>
-        <p>stuff here</p>
-        <p>stuff here</p>
-      </tbody>
-    </table>
-    <li class="nav-item">
+    <% if @courses != nil %>
+      <h1 class="mt-4">My Courses</h1>
+      <table class="table my-2">
+        <thead>
+          <th scope="col">Name</th>
+          <th scope="col">City</th>
+          <th scope="col">State</th>
+        </thead>
+        <tbody>
+          <% @courses.each do |course| %>
+          <tr>
+            <td><%= link_to course.name, course, class:"link-secondary" %></td>
+            <td><%= course.city %></td>
+            <td><%= course.state %></td>
+          </tr>
+        <% end %>          
+        </tbody>
+      </table>
+    <% end %>
+    <p class="nav-item">
       <%= link_to "Edit Profile", edit_user_registration_path, class:"btn btn-outline-dark" %>
-    </li>
+    </p>
 </div>
