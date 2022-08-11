@@ -4,6 +4,15 @@
 
 import { application } from "./application"
 
+import ArchitectController from "./architect_controller"
+application.register("architect", ArchitectController)
+
+import ComposerController from "./composer_controller"
+application.register("composer", ComposerController)
+
+import GrandmotherController from "./grandmother_controller"
+application.register("grandmother", GrandmotherController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 

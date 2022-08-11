@@ -2,10 +2,13 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="scorecard"
 export default class extends Controller {
-  static targets = ["output"]
+  static targets = ["shots"]
+  static values = {
+    number: Number
+
+  }
 
   initialize() {
-    this.clickCount = 0;
   }
 
   connect() {
@@ -13,12 +16,12 @@ export default class extends Controller {
   }
 
   addOne() {
-    this.clickCount++;
+    this.numberValue++;
     this._updateOutput();
   }
 
   _updateOutput() {
-    this.outputTarget.innerText = `You've clicked ${this.clickCount} times`;
+    this.outputTarget.textContent = this.numberValue
   }
 
 };
