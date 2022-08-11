@@ -6,24 +6,11 @@ export default class extends Controller {
   "thispar", 
   "thishole", 
   "thisscore",
-  "one",
-  "two",
-  "three",
-  "four",
-  "five",
-  "six",
-  "seven",
-  "eight",
-  "nine",
-  "scoreOne",
-  "scoreTwo",
-  "scoreThree",
-  "scoreFour",
-  "scoreFive",
-  "scoreSix",
-  "scoreSeven",
-  "scoreEight",
-  "scoreNine"
+  "par",
+  "score",
+  "total",
+  "parout",
+  "totalpar"
   ]
 
   initialize() {
@@ -31,37 +18,35 @@ export default class extends Controller {
     this.thishole = 1
     this.thispar = 0
     this.parlist = [0,0,0,0,0,0,0,0,0]
-
-    this.parlist[0] = this.oneTarget.innerText
-    this.parlist[1] = this.twoTarget.innerText
-    this.parlist[2] = this.threeTarget.innerText
-    this.parlist[3] = this.fourTarget.innerText
-    this.parlist[4] = this.fiveTarget.innerText
-    this.parlist[5] = this.sixTarget.innerText
-    this.parlist[6] = this.sevenTarget.innerText
-    this.parlist[7] = this.eightTarget.innerText
-    this.parlist[8] = this.nineTarget.innerText
-
-    this.total_score = 0
     this.scorelist = [0,0,0,0,0,0,0,0,0]
-
+    this.playerScores
+    this.total = 0
+    this.totalpar = 0
   }
 
   connect() {
     console.log("connect");
+    
+
+    for(let i = 0; i < 9; i++){
+       this.parlist[i] = this.parTargets[i].innerText
+       this.paroutTargets[i].innerText = this.parlist[i]
+       this.totalpar += parseInt(this.parlist[i])
+    }
+
     this.thispar = this.parlist[this.thishole-1]
+    this.totalparTarget.innerText = this.totalpar
+
     this._updateOutput()
   }
 
   shotInc() {
     this.thisscore++
-    this.total_score++
     this._updateOutput()
   }
 
   shotUndo() {
     this.thisscore--
-    this.total_score--
     this._updateOutput()
   }
 
@@ -71,23 +56,16 @@ export default class extends Controller {
     this.thisscore = 0
     this.thispar = this.parlist[this.thishole-1]
     this._updateScores()
-    if(thishole < 10) {
-      this._updateOutput()
-    }
+    this._updateOutput()
   }
 
   _updateScores() {
-
-  this.scoreOneTarget.innerText = this.scorelist[]
-  this.scoreTwoTarget.innerText = this.scorelist[]
-  this.scoreThreeTarget.innerText = this.scorelist[]
-  this.scoreFourTarget.innerText = this.scorelist[]
-  this.scoreFiveTarget.innerText = this.scorelist[]
-  this.scoreSixTarget.innerText = this.scorelist[]
-  this.scoreSevenTarget.innerText = this.scorelist[]
-  this.scoreEightTarget.innerText = this.scorelist[]
-  this.scoreNineTarget.innerText = this.scorelist[]
-
+    this.total = 0
+    for(let i = 0; i < 9; i++){
+      this.scoreTargets[i].innerText = this.scorelist[i]
+      this.total += this.scorelist[i]
+    }
+    this.totalTarget.innerText = this.total
   }
 
 
@@ -95,6 +73,5 @@ export default class extends Controller {
     this.thisholeTarget.innerText = this.thishole
     this.thisscoreTarget.innerText = this.thisscore
     this.thisparTarget.innerText = this.thispar
-    this.totalTarget.innerText = this.total_score
   }
 };

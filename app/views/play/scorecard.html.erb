@@ -2,15 +2,15 @@
 
 <div class="card text-center"  data-controller="grandmother">
 	<div style="display:none;"> 
-		<p data-grandmother-target="one"><%= @par_list[0] %></p>
-		<p data-grandmother-target="two"><%= @par_list[1] %></p>
-		<p data-grandmother-target="three"><%= @par_list[2] %></p>
-		<p data-grandmother-target="four"><%= @par_list[3] %></p>
-		<p data-grandmother-target="five"><%= @par_list[4] %></p>
-		<p data-grandmother-target="six"><%= @par_list[5] %></p>
-		<p data-grandmother-target="seven"><%= @par_list[6] %></p>
-		<p data-grandmother-target="eight"><%= @par_list[7] %></p>
-		<p data-grandmother-target="nine"><%= @par_list[8] %></p>
+		<p data-grandmother-target="par"><%= @par_list[0] %></p>
+		<p data-grandmother-target="par"><%= @par_list[1] %></p>
+		<p data-grandmother-target="par"><%= @par_list[2] %></p>
+		<p data-grandmother-target="par"><%= @par_list[3] %></p>
+		<p data-grandmother-target="par"><%= @par_list[4] %></p>
+		<p data-grandmother-target="par"><%= @par_list[5] %></p>
+		<p data-grandmother-target="par"><%= @par_list[6] %></p>
+		<p data-grandmother-target="par"><%= @par_list[7] %></p>
+		<p data-grandmother-target="par"><%= @par_list[8] %></p>
 	</div>
 
   <div class="card-header">
@@ -35,26 +35,54 @@
 	   	<div class="btn-group" role="group" aria-label="Basic example">
   			<button type="button" class="btn btn-primary bg-gradient" data-action="grandmother#shotInc">Throw</button>
 	 			<button type="button" class="btn btn-secondary bg-gradient" data-action="grandmother#shotUndo">Undo</button>
+	 			<button type="button" class="btn btn-success bg-gradient" data-action="click->grandmother#holeInc">Next</button>
 			</div>
 		</div>
-	<br>
-	<div class="row">
-	  <div class="btn-group" role="group" aria-label="Basic example">
-  		<button type="button" class="btn btn-success bg-gradient" data-action="click->grandmother#holeInc">Next</button>
-		</div>
-  </div>
-  <div class="row">
-  	<td> 1: <span data-grandmother-target="scoreOne"></span></td>
-  	<td> 2: <span data-grandmother-target="scoreTwo"></td>
-  	<td> 3: <span data-grandmother-target="scoreThree"></td>
-  	<td> 4: <span data-grandmother-target="scoreFour"></td>
-  	<td> 5: <span data-grandmother-target="scoreFive"></td>
-  	<td> 6: <span data-grandmother-target="scoreSix"></td>
-  	<td> 7: <span data-grandmother-target="scoreSeven"></td>
-  	<td> 8: <span data-grandmother-target="scoreEight"></td>
-  	<td> 9: <span data-grandmother-target="scoreNine"></td>
-  	<td> T: <span data-grandmother-target="total"></td>
-  </div>
+		<br>
+	  <table class="table table-success">
+	  	<thead>
+	  		<tr>
+	  			<th>Hole #</th>
+	  			<th scope="col">1</th>
+	  			<th scope="col">2</th>
+	  			<th scope="col">3</th>
+	  			<th scope="col">4</th>
+	  			<th scope="col">5</th>
+	  			<th scope="col">6</th>
+	  			<th scope="col">7</th>
+	  			<th scope="col">8</th>
+	  			<th scope="col">9</th>
+	  			<th scope="col">T</th>
+	  		</tr>
+	  		<tr>
+	  			<th>Pars</th>
+	  			<th scope="col" data-grandmother-target="parout"></th>
+	  			<th scope="col" data-grandmother-target="parout"></th>
+	  			<th scope="col" data-grandmother-target="parout"></th>
+	  			<th scope="col" data-grandmother-target="parout"></th>
+	  			<th scope="col" data-grandmother-target="parout"></th>
+	  			<th scope="col" data-grandmother-target="parout"></th>
+	  			<th scope="col" data-grandmother-target="parout"></th>
+	  			<th scope="col" data-grandmother-target="parout"></th>
+	  			<th scope="col" data-grandmother-target="parout"></th>
+	  			<th scope="col" data-grandmother-target="totalpar"></th>
+	  		</tr>
+		  <tbody>
+		  	<tr>
+		  		<td>Score</td>
+			  	<td data-grandmother-target="score"></td>
+			  	<td data-grandmother-target="score"></td>
+			  	<td data-grandmother-target="score"></td>
+			  	<td data-grandmother-target="score"></td>
+			  	<td data-grandmother-target="score"></td>
+			  	<td data-grandmother-target="score"></td>
+			  	<td data-grandmother-target="score"></td>
+			  	<td data-grandmother-target="score"></td>
+			  	<td data-grandmother-target="score"></td>
+			  	<td data-grandmother-target="total"></td>
+			  </tr>
+		  </tbody>
+		</table>
     <!--
     <div class="row mb-1">
 	   	<div class="btn-group" role="group" aria-label="First 3 shots">
