@@ -19,25 +19,25 @@ export default class extends Controller {
   initialize() {
     this.shots = 0
     this.misses = 0
-    this._updateOutput()
+    this.this_hole = 1
   }
 
   connect() {
-
+    this._updateOutput()
   }
 
-  incrementShot({ detail: {content} }) {
+  incrementFour() {
+    
+  }
+
+  incrementShot() {
     this.shots++
     this._updateOutput()
   }
 
-  incrementMiss({ detail: {content} }) {
+  incrementMiss() {
     this.misses++
     this._updateOutput()
   }
 
-  _updateOutput() {
-  }
-
-
-}
+};

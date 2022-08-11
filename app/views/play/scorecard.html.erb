@@ -1,9 +1,16 @@
 <br><br>
-<div class="card text-center" data-controller="grandmother composer architect">
-	<div data-grandmother-target="par_list">
-		<% @par_list.each do |x| %>
-			<p class="par_list"><%= x %></p>
-		<% end %>
+
+<div class="card text-center"  data-controller="grandmother">
+	<div style="display:none;"> 
+		<p data-grandmother-target="one"><%= @par_list[0] %></p>
+		<p data-grandmother-target="two"><%= @par_list[1] %></p>
+		<p data-grandmother-target="three"><%= @par_list[2] %></p>
+		<p data-grandmother-target="four"><%= @par_list[3] %></p>
+		<p data-grandmother-target="five"><%= @par_list[4] %></p>
+		<p data-grandmother-target="six"><%= @par_list[5] %></p>
+		<p data-grandmother-target="seven"><%= @par_list[6] %></p>
+		<p data-grandmother-target="eight"><%= @par_list[7] %></p>
+		<p data-grandmother-target="nine"><%= @par_list[8] %></p>
 	</div>
 
   <div class="card-header">
@@ -15,76 +22,62 @@
     </div>
     <div class="row mb-2">
     	<div class="col-4">
-    		<p>Par: <span data-grandmother-target="this-par"></span></p>
+    		<p>Par: <span data-grandmother-target="thispar"></span></p>
     	</div>
     	<div class="col-4">
-    		<p>Hole: <span data-grandmother-target="this_hole"></span></p>
+    		<p>Hole: <span data-grandmother-target="thishole"></span></p>
     	</div>
     	<div class="col-4">
-    		<p>Score: <span data-grandmother-target="this_score"></span></p>
+    		<p>Score: <span data-grandmother-target="thisscore"></span></p>
     	</div>
     </div>
-
-    <div class="container-sm">
-    	<div class="row mb-1">
-	    	<div class="btn-group" role="group" aria-label="First 3 shots">
-	  			<button type="button" class="btn btn-primary bg-gradient" data-architect-target="one">1</button>
-
-	  			<button type="button" class="btn btn-primary bg-gradient" data-architect-target="two">2</button>
-
-	  			<button type="button" class="btn btn-primary bg-gradient" data-architect-target="three">3</button>
-	  			
+    <div class="row mb-2">
+	   	<div class="btn-group" role="group" aria-label="Basic example">
+  			<button type="button" class="btn btn-primary bg-gradient" data-action="grandmother#shotInc">Throw</button>
+	 			<button type="button" class="btn btn-secondary bg-gradient" data-action="grandmother#shotUndo">Undo</button>
 			</div>
 		</div>
+	<br>
+	<div class="row">
+	  <div class="btn-group" role="group" aria-label="Basic example">
+  		<button type="button" class="btn btn-success bg-gradient" data-action="click->grandmother#holeInc">Next</button>
+		</div>
+  </div>
+  <div class="row">
+  	<td> 1: <span data-grandmother-target="scoreOne"></span></td>
+  	<td> 2: <span data-grandmother-target="scoreTwo"></td>
+  	<td> 3: <span data-grandmother-target="scoreThree"></td>
+  	<td> 4: <span data-grandmother-target="scoreFour"></td>
+  	<td> 5: <span data-grandmother-target="scoreFive"></td>
+  	<td> 6: <span data-grandmother-target="scoreSix"></td>
+  	<td> 7: <span data-grandmother-target="scoreSeven"></td>
+  	<td> 8: <span data-grandmother-target="scoreEight"></td>
+  	<td> 9: <span data-grandmother-target="scoreNine"></td>
+  	<td> T: <span data-grandmother-target="total"></td>
+  </div>
+    <!--
+    <div class="row mb-1">
+	   	<div class="btn-group" role="group" aria-label="First 3 shots">
+	  		<button type="button" class="btn btn-primary bg-gradient" data-architect-target="one">1</button>
+  			<button type="button" class="btn btn-primary bg-gradient" data-architect-target="two">2</button>
+  			<button type="button" class="btn btn-primary bg-gradient" data-architect-target="three">3</button>
+  		</div>	
+		</div>
 		<div class="row mb-1">
-	    	<div class="btn-group" role="group" aria-label="Second 3 shots">
-	  			<button type="button" class="btn btn-primary bg-gradient" data-architect-target="four">4</button>
-
-	  			<button type="button" class="btn btn-primary bg-gradient" data-architect-target="five">5</button>
-
-	  			<button type="button" class="btn btn-primary bg-gradient" data-architect-target="six">6</button>
-	  			
+	    <div class="btn-group" role="group" aria-label="Second 3 shots">
+	  		<button type="button" class="btn btn-primary bg-gradient" data-architect-target="four">4</button>
+	  		<button type="button" class="btn btn-primary bg-gradient" data-architect-target="five">5</button>
+	  		<button type="button" class="btn btn-primary bg-gradient" data-architect-target="six">6</button>
 			</div>
 		</div>
 		<div class="row">
-	    	<div class="btn-group" role="group" aria-label="Third 3 shots">
-	  			<button type="button" class="btn btn-primary bg-gradient" data-architect-target="seven">7</button>
-
-	  			<button type="button" class="btn btn-primary bg-gradient" data-architect-target="eight">8</button>
-	  			
-	  			<button type="button" class="btn btn-primary bg-gradient" data-architect-target="nine">9</button>
-	  			 
+	   	<div class="btn-group" role="group" aria-label="Third 3 shots">
+	  		<button type="button" class="btn btn-primary bg-gradient" data-architect-target="seven">7</button>
+	  		<button type="button" class="btn btn-primary bg-gradient" data-architect-target="eight">8</button>
+	  		<button type="button" class="btn btn-primary bg-gradient" data-architect-target="nine">9</button>
 			</div>
 		</div>
   </div>
-  <div class="card-footer text-muted">
-  	<div class="row mb-4">
-	    <div class="btn-group" role="group" aria-label="Basic example">
-  			<button type="button" class="btn btn-primary bg-gradient"		
-  			 data-action="click->composer#writeDrive">Drive</button>
-
-  			<button type="button" class="btn btn-secondary bg-gradient"	
-  			 data-action="click->composer#writeMid">Mid</button>
-
-  			<button type="button" class="btn btn-info bg-gradient"			
-  			 data-action="click->composer#writePutt">Putt</button>
-
-  			<button type="button" class="btn btn-warning bg-gradient"		
-  			 data-action="click->composer#writeFault">Fault</button>
-			</div>
-		</div>
-	</div>
-	<div class="table-group-divider"></div>
-	<br>
-	<div class="row">
-	   	<div class="btn-group" role="group" aria-label="Basic example">
-  			<button type="button" class="btn btn-secondary bg-gradient">Last</button>
-  			<button type="button" class="btn btn-primary bg-gradient">Card</button>
-  			<button type="button" class="btn btn-success bg-gradient">Next</button>
-		</div>
-	</div>
-	<div>
-		<button data-action="click->grandmother#printPar">parprint</button>
-		<p><span data-grandmother-target="parset"></span></p>
+	-->
 	</div>
 </div>

@@ -16,5 +16,8 @@ application.register("grandmother", GrandmotherController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import PlayerController from "./player_controller"
+application.register("player", PlayerController)
+
 import ScorecardController from "./scorecard_controller"
 application.register("scorecard", ScorecardController)
