@@ -19,7 +19,6 @@ export default class extends Controller {
     this.thispar = 0
     this.parlist = [0,0,0,0,0,0,0,0,0]
     this.scorelist = [0,0,0,0,0,0,0,0,0]
-    this.playerScores
     this.total = 0
     this.totalpar = 0
   }
@@ -51,11 +50,17 @@ export default class extends Controller {
   }
 
   holeInc() {
-    this.scorelist[this.thishole-1] += this.thisscore
+    this.scorelist[this.thishole-1] = this.thisscore
     this.thishole++
-    this.thisscore = 0
+    this.thisscore = this.scorelist[this.thishole-1]
     this.thispar = this.parlist[this.thishole-1]
     this._updateScores()
+    this._updateOutput()
+  }
+
+  holePrevious() {
+    this.thishole--
+    this.thisscore = this.scorelist[this.thishole-1]
     this._updateOutput()
   }
 

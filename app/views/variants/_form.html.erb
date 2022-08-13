@@ -10,6 +10,10 @@
       </ul>
     </div>
   <% end %>
+  <% if @variant.name == nil %>
+    <% @variant.name = "Enter Name" %>
+  <% end %>
+  <%# @variant.name %>
 
   <%= form.text_field :name, class:"form-control", placeholder: @variant.name %>
   <table class="table table-sm">
@@ -79,7 +83,7 @@
 <div class="row, pt-1">
   <%= form.number_field :course_id, id: :variant_course_id, class:"form-control", value:course_id, type: :hidden %>
 </div>
-<%= form.submit class:"btn btn-success" %>
+<%= form.submit "Save Layout", class:"btn btn-success" %>
 
 <% end %>
 
