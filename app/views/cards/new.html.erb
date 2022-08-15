@@ -72,6 +72,7 @@
           <th scope="col" data-grandmother-target="pardisplay"></th>
           <th scope="col" data-grandmother-target="totalpar"></th>
         </tr>
+      </thead>
       <tbody>
         <tr>
           <td>Score</td>
@@ -103,19 +104,19 @@
     <% end %>
 
     <div>
-      <%= form.hidden_field :score %>
+      <%= form.text_area :score, data: {target: "grandmother.scoreout" } %>
     </div>
 
     <div>
-      <%= form.hidden_field :shots %>
+      <%= form.text_area :shots, data: {target: "grandmother.shotsout" } %>
     </div>
 
     <div>
-      <%= form.hidden_field :user_id %>
+      <%= form.number_field :user_id, id: :card_user_id, class:"form-control", value:current_user.id %>
     </div>
 
     <div>
-      <%= form.hidden_field :variant_id %>
+      <%= form.number_field :variant_id, id: :card_variant_id, class:"form-control", value:@variant.id %>
     </div>
 
     <div>

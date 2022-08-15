@@ -82,6 +82,9 @@ export default class extends Controller {
       this.thisscoreTarget.innerText = this.total
       this.thisparTarget.innerText = this.totalpar
       this.thisholeTarget.innerText = "9 Holes"
+
+      this.scoreoutTarget.innerText = this.total
+      this.shotsoutTarget.innerText = this.shotstring
     }
   }
 

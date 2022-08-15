@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/about'
   get 'home/profile'
-  get 'home/my_courses'
+  get 'home/my_courses'  
+  get 'play/around'
+
 end
