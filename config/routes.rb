@@ -8,6 +8,4 @@ Rails.application.routes.draw do
   get 'home/about'
   get 'home/profile'
   get 'home/my_courses'
-  get 'play/scorecard'
-
 end

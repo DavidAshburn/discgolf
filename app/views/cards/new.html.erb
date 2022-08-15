@@ -1,9 +1,126 @@
-<h1>New card</h1>
+<br><br>
 
-<%= render "form", card: @card %>
+<div class="card text-center"  data-controller="grandmother">
+  <div style="display:none;"> 
+    <p data-grandmother-target="par"><%= @par_list[0] %></p>
+    <p data-grandmother-target="par"><%= @par_list[1] %></p>
+    <p data-grandmother-target="par"><%= @par_list[2] %></p>
+    <p data-grandmother-target="par"><%= @par_list[3] %></p>
+    <p data-grandmother-target="par"><%= @par_list[4] %></p>
+    <p data-grandmother-target="par"><%= @par_list[5] %></p>
+    <p data-grandmother-target="par"><%= @par_list[6] %></p>
+    <p data-grandmother-target="par"><%= @par_list[7] %></p>
+    <p data-grandmother-target="par"><%= @par_list[8] %></p>
+  </div>
 
-<br>
+  <div class="card-header">
+    <%= "#{Course.find_by(id: @variant.course_id).name}" %>
+  </div>
+  <div class="card-body">
+    <div class="row mb-2">
+      <h5 class="card-title"> <%= "#{@variant.name}" %></h5>
+    </div>
+    <div class="row mb-2">
+      <div class="col-4">
+        <p data-grandmother-target="parlabel">Par: <span data-grandmother-target="thispar"></span></p>
+      </div>
+      <div class="col-4">
+        <p data-grandmother-target="holelabel"><span data-grandmother-target="thishole"></span></p>
+      </div>
+      <div class="col-4">
+        <p data-grandmother-target="scorelabel">Score: <span data-grandmother-target="thisscore"></span></p>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="btn-group" role="group" aria-label="Throws">
+        <button type="button" class="btn btn-primary bg-gradient" data-action="grandmother#shotInc">Throw</button>
+        <button type="button" class="btn btn-secondary bg-gradient" data-action="grandmother#shotUndo">Undo</button>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="btn-group" role="group" aria-label="Holes">
+        <button type="button" class="btn btn-secondary bg-gradient" data-action="grandmother#holePrevious">Back</button>
+        <button type="button" class="btn btn-success bg-gradient" data-action="grandmother#holeInc">Next</button>
+      </div>
+    </div>
+    <br>
+    <table class="table table-success">
+      <thead>
+        <tr>
+          <th>Hole #</th>
+          <th scope="col">1</th>
+          <th scope="col">2</th>
+          <th scope="col">3</th>
+          <th scope="col">4</th>
+          <th scope="col">5</th>
+          <th scope="col">6</th>
+          <th scope="col">7</th>
+          <th scope="col">8</th>
+          <th scope="col">9</th>
+          <th scope="col">T</th>
+        </tr>
+        <tr>
+          <th>Pars</th>
+          <th scope="col" data-grandmother-target="pardisplay"></th>
+          <th scope="col" data-grandmother-target="pardisplay"></th>
+          <th scope="col" data-grandmother-target="pardisplay"></th>
+          <th scope="col" data-grandmother-target="pardisplay"></th>
+          <th scope="col" data-grandmother-target="pardisplay"></th>
+          <th scope="col" data-grandmother-target="pardisplay"></th>
+          <th scope="col" data-grandmother-target="pardisplay"></th>
+          <th scope="col" data-grandmother-target="pardisplay"></th>
+          <th scope="col" data-grandmother-target="pardisplay"></th>
+          <th scope="col" data-grandmother-target="totalpar"></th>
+        </tr>
+      <tbody>
+        <tr>
+          <td>Score</td>
+          <td data-grandmother-target="score"></td>
+          <td data-grandmother-target="score"></td>
+          <td data-grandmother-target="score"></td>
+          <td data-grandmother-target="score"></td>
+          <td data-grandmother-target="score"></td>
+          <td data-grandmother-target="score"></td>
+          <td data-grandmother-target="score"></td>
+          <td data-grandmother-target="score"></td>
+          <td data-grandmother-target="score"></td>
+          <td data-grandmother-target="total"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <%= form_with model: @card do |form| %>
+    <% if @card.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
 
-<div>
-  <%= link_to "Back to cards", cards_path %>
+        <ul>
+          <% @card.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.hidden_field :score %>
+    </div>
+
+    <div>
+      <%= form.hidden_field :shots %>
+    </div>
+
+    <div>
+      <%= form.hidden_field :user_id %>
+    </div>
+
+    <div>
+      <%= form.hidden_field :variant_id %>
+    </div>
+
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
 </div>
+
