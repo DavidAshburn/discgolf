@@ -22,18 +22,21 @@
     </div>
     <div class="row mb-2">
       <div class="col-4">
-        <p data-grandmother-target="parlabel">Par: <span data-grandmother-target="thispar"></span></p>
+        <p data-grandmother-target="parlabel"><span data-grandmother-target="thispar"></span></p>
       </div>
       <div class="col-4">
         <p data-grandmother-target="holelabel"><span data-grandmother-target="thishole"></span></p>
       </div>
       <div class="col-4">
-        <p data-grandmother-target="scorelabel">Score: <span data-grandmother-target="thisscore"></span></p>
+        <p data-grandmother-target="scorelabel"><span data-grandmother-target="thisscore"></span></p>
       </div>
     </div>
     <div class="row mb-2">
       <div class="btn-group" role="group" aria-label="Throws">
-        <button type="button" class="btn btn-primary bg-gradient" data-action="grandmother#shotInc">Throw</button>
+        <%# <button type="button" class="btn btn-primary bg-gradient" data-action="grandmother#shotInc">Throw</button> %>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          Throw
+        </button>
         <button type="button" class="btn btn-secondary bg-gradient" data-action="grandmother#shotUndo">Undo</button>
       </div>
     </div>
@@ -120,5 +123,47 @@
       <button type="submit" class="btn btn-primary">Finalize</button>
     </div>
   <% end %>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Choose Your Lie</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-5">
+            <div class="btn-group" role="group" aria-label="Throws">
+              <button type="button" class="btn btn-success" data-action="grandmother#shotInc grandmother#writeBasket" data-bs-dismiss="modal">
+                Basket
+              </button>
+              <button type="button" class="btn btn-outline-success" data-action="grandmother#shotInc grandmother#writeCircleOne" data-bs-dismiss="modal">
+                Circle 1
+              </button>
+              <button type="button" class="btn btn-success" data-action="grandmother#shotInc grandmother#writeCircleTwo" data-bs-dismiss="modal">
+                Circle 2
+              </button>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="btn-group" role="group" aria-label="Throws">
+              <button type="button" class="btn btn-primary" data-action="grandmother#shotInc grandmother#writeFairway" data-bs-dismiss="modal">
+                Fairway
+              </button>
+              <button type="button" class="btn btn-outline-primary" data-action="grandmother#shotInc grandmother#writeOffFairway" data-bs-dismiss="modal">
+                Off Fairway
+              </button>
+              <button type="button" class="btn btn-warning" data-action="grandmother#shotInc grandmother#writePenalty" data-bs-dismiss="modal">
+                Penalty
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
+
 

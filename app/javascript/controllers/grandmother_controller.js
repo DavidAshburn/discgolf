@@ -6,17 +6,14 @@ export default class extends Controller {
   static targets = [ 
   "thispar", 
   "thishole", 
-  "thisscore", // to update labels on screen
+  "thisscore", // all 3 update labels on screen
   "par", //importing parlist on init. to pardisplay
   "score", //_updateScores scoreboard
   "total", //score total for player
-  "pardisplay", 
+  "pardisplay",  //scoreboard row
   "totalpar",  //scoreboard row
-  "parlabel", 
-  "holelabel",
-  "scorelabel", //these three change after inputting 9th hole score
-  "scoreout", 
-  "shotsout" //tags for hidden card form input
+  "scoreout", //hidden form
+  "shotsout" //hidden form
   ]
 
   initialize() {
@@ -27,7 +24,7 @@ export default class extends Controller {
     this.scorelist = [0,0,0,0,0,0,0,0,0]
     this.total = 0
     this.totalpar = 0
-    this.shotstring = "test"
+    this.shotstring = ""
   }
 
   connect() {
@@ -56,13 +53,12 @@ export default class extends Controller {
   shotUndo() {
     if(this.thishole > 1 && this.thishole < 10) {
       this.thisscore--
+      this.shotstring = this.shotstring.slice(0,-1)
       this._updateOutput()
     }
   }
 
   holeInc() {
-    // Hole "10" just has the totals of pars and your scores, next converts to Submit button, back still works
-    //we update normally early on
     if(this.thishole < 9){
       this.scorelist[this.thishole-1] = this.thisscore
 
@@ -79,13 +75,37 @@ export default class extends Controller {
 
       this._updateScores()
 
-      this.thisscoreTarget.innerText = this.total
-      this.thisparTarget.innerText = this.totalpar
+      this.thisscoreTarget.innerText = `Score: ${this.total}`
+      this.thisparTarget.innerText = `Par: ${this.totalpar}`
       this.thisholeTarget.innerText = "9 Holes"
 
       this.scoreoutTarget.innerHTML = this.total
       this.shotsoutTarget.innerText = this.shotstring
     }
+  }
+
+  writeBasket() {
+    this.shotstring = this.shotstring.concat('b')
+  }
+
+  writeCircleOne() {
+    this.shotstring = this.shotstring.concat('c')
+  }
+
+  writeCircleTwo() {
+    this.shotstring = this.shotstring.concat('t')
+  }
+
+  writeFairway() {
+    this.shotstring = this.shotstring.concat('f')
+  }
+
+  writeOffFairway() {
+    this.shotstring = this.shotstring.concat('o')
+  }
+
+  writePenalty() {
+    this.shotstring = this.shotstring.concat('p')
   }
 
   holePrevious() {
@@ -108,7 +128,7 @@ export default class extends Controller {
 
   _updateOutput() {
     this.thisholeTarget.innerText = `Hole: ${this.thishole}`
-    this.thisscoreTarget.innerText = this.thisscore
-    this.thisparTarget.innerText = this.thispar
+    this.thisscoreTarget.innerText = `Score: ${this.thisscore}`
+    this.thisparTarget.innerText = `Par: ${this.thispar}`
   }
 };

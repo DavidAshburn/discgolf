@@ -7,15 +7,12 @@
     <table class="table table-striped table-hover table-sm">
       <tbody>
       <% @course.variants.each do |variant| %>
-        <tr class="align-middle fs-4">
-          <td class="align-middle" colspan="4">
+        <tr class="fs-4">
+          <td colspan="5">
               <%= link_to variant.name, edit_variant_path(variant.id, :course_id => @course.id), class:"btn btn-success" %>
           </td>
-          <td class="align-middle" colspan="4">
+          <td colspan="5">
               <%= link_to "Play a Round", new_card_path( variant_id: variant.id ), class:"btn btn-warning" %>
-          </td>
-          <td class="align-middle" colspan="4">
-              <%= variant.id %>
           </td>
         </tr>
         <tr class="align-middle fs-4">
