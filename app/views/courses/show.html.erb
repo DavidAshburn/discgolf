@@ -14,6 +14,9 @@
           <td class="align-middle" colspan="4">
               <%= link_to "Play a Round", new_card_path( variant_id: variant.id ), class:"btn btn-warning" %>
           </td>
+          <td class="align-middle" colspan="4">
+              <%= variant.id %>
+          </td>
         </tr>
         <tr class="align-middle fs-4">
           <td><%= variant.one %></td>

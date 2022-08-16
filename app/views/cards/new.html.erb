@@ -101,7 +101,7 @@
     <% end %>
 
     <div>
-      <%= form.number_field :score, data: {target: "grandmother.scoreout" } %>
+      <%= form.text_area :score, data: {target: "grandmother.scoreout" } %>
     </div>
 
     <div>
@@ -117,7 +117,7 @@
     </div>
 
     <div>
-      <%= form.submit %>
+      <button type="submit" class="btn btn-primary">Finalize</button>
     </div>
   <% end %>
 </div>

@@ -25,7 +25,7 @@ class CardsController < ApplicationController
   # POST /cards or /cards.json
   def create
     @card = Card.new(card_params)
-    @variant = Variant.find_by(id: params[:variant_id])
+    @variant = Variant.find_by(id: @card.variant_id)
     @par_list = []
     @par_list.push(@variant.one,@variant.two,@variant.three,@variant.four,@variant.five,@variant.six,@variant.seven,@variant.eight,@variant.nine)
 
