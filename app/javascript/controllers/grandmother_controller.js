@@ -53,6 +53,9 @@ export default class extends Controller {
   shotUndo() {
     if(this.thishole > 1 && this.thishole < 10) {
       this.thisscore--
+      //have to undo penalties correctly
+      if (this.shotstring.substr(-1,1) == 'p')
+        this.thisscore--
       this.shotstring = this.shotstring.slice(0,-1)
       this._updateOutput()
     }
@@ -104,8 +107,10 @@ export default class extends Controller {
     this.shotstring = this.shotstring.concat('o')
   }
 
+  //accounting for the extra penalty stroke here
   writePenalty() {
     this.shotstring = this.shotstring.concat('p')
+    this.thisscore++
   }
 
   holePrevious() {
