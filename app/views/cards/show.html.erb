@@ -1,5 +1,5 @@
 
-<div data-controller="reporter">
+<div data-controller="reporter"  data-reporter-albatross-class="bg-dark bg-gradient text-white" data-reporter-eagle-class="bg-info bg-gradient" data-reporter-birdie-class="bg-primary bg-gradient" data-reporter-par-class="bg-success bg-gradient" data-reporter-bogey-class="bg-secondary bg-gradient" data-reporter-double-class="bg-warning bg-gradient" data-reporter-triple-class="bg-danger bg-gradient">
   <% thiscourse = Course.find_by(id: @card.course_id) %>
   <% thisvariant = Variant.find_by(id: @card.variant_id) %>
   <div style="display: none;">
@@ -10,53 +10,53 @@
     <h1 class="card-header text-center"><%= thiscourse.name %></h1>
     <div class="card-body">
       <h5 class="card-title text-center text-muted"><%= thisvariant.name %></h5>
-      <h6 class="card-title text-center text-muted"><%= @card.created_at.to_fs(:long) %></h6>
+      <h6 class="card-title text-center text-muted"><%= @card.created_at.to_fs(:long)[0..-6] %></h6>
 
-      <table class="table table-success">
+      <table class="table table-success text-center">
         <thead>
           <tr>
-            <th scope="col">1</th>
-            <th scope="col">2</th>
-            <th scope="col">3</th>
-            <th scope="col">4</th>
-            <th scope="col">5</th>
-            <th scope="col">6</th>
-            <th scope="col">7</th>
-            <th scope="col">8</th>
-            <th scope="col">9</th>
-            <th scope="col">T</th>
-          </tr>
-          <tr> <!-- taking data from the cards_controller into reporter_controller.js here -->
-            <th scope="col" data-reporter-target="holepar"><%= thisvariant.one %></th>
-            <th scope="col" data-reporter-target="holepar"><%= thisvariant.two %></th>
-            <th scope="col" data-reporter-target="holepar"><%= thisvariant.three %></th>
-            <th scope="col" data-reporter-target="holepar"><%= thisvariant.four %></th>
-            <th scope="col" data-reporter-target="holepar"><%= thisvariant.five %></th>
-            <th scope="col" data-reporter-target="holepar"><%= thisvariant.six %></th>
-            <th scope="col" data-reporter-target="holepar"><%= thisvariant.seven %></th>
-            <th scope="col" data-reporter-target="holepar"><%= thisvariant.eight %></th>
-            <th scope="col" data-reporter-target="holepar"><%= thisvariant.nine %></th>
-            <th scope="col" data-reporter-target="totalpar"></th>
+            <th scope="col" class="border border-light border-4 rounded">1</th>
+            <th scope="col" class="border border-light border-4">2</th>
+            <th scope="col" class="border border-light border-4">3</th>
+            <th scope="col" class="border border-light border-4">4</th>
+            <th scope="col" class="border border-light border-4">5</th>
+            <th scope="col" class="border border-light border-4">6</th>
+            <th scope="col" class="border border-light border-4">7</th>
+            <th scope="col" class="border border-light border-4">8</th>
+            <th scope="col" class="border border-light border-4">9</th>
+            <th scope="col" class="border border-light border-4">T</th>
           </tr>
         </thead>
         <tbody>
+          <tr class="table-primary"> <!-- taking data from the cards_controller into reporter_controller.js here -->
+            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.one %></em></small></small></th>
+            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.two %></em></small></th>
+            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.three %></em></small></th>
+            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.four %></em></small></th>
+            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.five %></em></small></th>
+            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.six %></em></small></th>
+            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.seven %></em></small></th>
+            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.eight %></em></small></th>
+            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.nine %></em></small></th>
+            <th scope="col" class="border border-light border-4"><small><em data-reporter-target="totalpar"></em></small></th>
+          </tr>
           <tr>
-            <td data-reporter-target="score"></td>
-            <td data-reporter-target="score"></td>
-            <td data-reporter-target="score"></td>
-            <td data-reporter-target="score"></td>
-            <td data-reporter-target="score"></td>
-            <td data-reporter-target="score"></td>
-            <td data-reporter-target="score"></td>
-            <td data-reporter-target="score"></td>
-            <td data-reporter-target="score"></td>
-            <td data-reporter-target="total"></td>
+            <td class="border border-light border-4" data-reporter-target="score" data-action="mouseover->reporter#loadStyle"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="total"></td>
           </tr>
         </tbody>
       </table>
       <table class="table">
         <tr class="table-primary">
-          <th scope="row">Circle One</th>
+          <th scope="row border border-light border-4">Circle One</th>
           <td><small data-reporter-target="circleonedata"></small>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
             <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
@@ -70,7 +70,7 @@
           <td data-reporter-target="circleoneputt"></td>
         </tr>
         <tr class="table-primary">
-          <th scope="row">Circle Two</th>
+          <th scope="row border border-light border-4">Circle Two</th>
           <td><small data-reporter-target="circletwodata"></small>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
             <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
@@ -84,7 +84,7 @@
           <td data-reporter-target="circletwoputt"></td>
         </tr>
         <tr class="table-primary">
-          <th scope="row">Drive Accuracy</th>
+          <th scope="row border border-light border-4">Drive Accuracy</th>
           <td><small data-reporter-target="drivedata"></small>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
             <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
@@ -98,7 +98,7 @@
           <td data-reporter-target="driveaccuracy"></td>
         </tr>
         <tr class="table-primary">
-          <th scope="row">GIR</th>
+          <th scope="row border border-light border-4">GIR</th>
           <td><small data-reporter-target="greendata"></small>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-1-circle" viewBox="0 0 16 16">
             <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"></path>
