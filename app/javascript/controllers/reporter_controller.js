@@ -7,31 +7,53 @@ export default class extends Controller {
     "totalpar",
     "score",
     "total",
-    "shotstring"
+    "shotstring",
+    "circleoneputt",
+    "circleonedata",
+    "circleonedata2",
+    "circletwoputt",
+    "circletwodata",
+    "circletwodata2",
+    "drivedata",
+    "drivedata2",
+    "driveaccuracy",
+    "greendata",
+    "greendata2",
+    "greeninregulation"
     ];
 
   initialize() {
     this.shotstring = this.shotstringTarget.innerText
     this.scorelist = [0,0,0,0,0,0] //scores on each hole - _parseShot()
-    this.firstShots = [0,0,0,0,0,0] //basket,c1,c2,fairway,off-fairway,penalty - _parseShot()
-    this.lastShots = [0,0,0,0,0,0]  //basket,c1,c2,fairway,off-fairway,penalty - _parseShot()
-    this.scoretotal = this.shotstring.length
+    this.scoretotal = this.shotstring.length + this.getCount('p') //penalties count for two strokes
     this.totalpar = 0
+    this.pars = []
+    this.gircount = 0
+    this.greenone = 0
+    this.greentwo = 0
   }
 
   connect() {
-    
     this.setScores()
     this.setPars()
-    this.parseShot()
+    this.setCircleOneStats()
+    this.setCircleTwoStats()
+    this.setDriveStats()
+    this.setGreenStats()
   }
 
-  setPars() { //calculate and fill the total par
-    this.holeparTargets.forEach(hole => this.totalpar += parseInt(hole.innerText))
+  //calculate and fill the total par on connect()
+  setPars() { 
+    this.holeparTargets.forEach(hole => {
+      this.totalpar += parseInt(hole.innerText)
+      this.pars.push(parseInt(hole.innerText))
+    })
     this.totalparTarget.innerText = this.totalpar
   }
 
-  setScores() { //recreate and fill the card scores
+
+  //recreate and fill the card scores on connect()
+  setScores() { 
     
     this.shot_array = this.shotstring.split("")
     let hole_score = 0
@@ -45,7 +67,6 @@ export default class extends Controller {
         hole_score = 0
       }
     }
-
     let scorelist_index = 0
     let score_sum = 0
     this.scoreTargets.forEach(box => {
@@ -53,68 +74,108 @@ export default class extends Controller {
       score_sum += this.scorelist[scorelist_index]
       scorelist_index++
     });
-
     this.totalTarget.innerText = score_sum
+  }
+
+
+  //helper that counts occurrences of a string within 'this.shotstring'
+  //regex seemed like overkill
+  getCount(chars) {
+    let charlen = chars.length
+    let output = 0
+    for(let i = 0; i < this.shotstring.length; i++) {
+      if (this.shotstring.substr(i,charlen) == chars) {
+        output++
+        i += charlen - 1
+      }
+    }
+    return output
+  }
+
+
+  setCircleOneStats() {
+    let good_circle_one_putts = this.getCount("cb")
+    let all_circle_one_putts = this.getCount("c")
+    let pen_one_putts = this.getCount("cp")
+    let c1_one_putts = this.getCount("cc")
+
+    this.circleonedataTarget.innerText = `${ pen_one_putts.toFixed(0) }`
+    this.circleonedata2Target.innerText = `${ c1_one_putts.toFixed(0) }`
+
+    if(all_circle_one_putts > 0)
+      this.circleoneputtTarget.innerText = `${((good_circle_one_putts / all_circle_one_putts)*100).toFixed(0)}%`
+    else 
+      this.circleoneputtTarget.innerText = "None"
+  }
+
+
+
+  setCircleTwoStats() {
+    let good_circle_two_putts = this.getCount("tb")
+    let all_circle_two_putts = this.getCount("t")
+    let pen_two_putts = this.getCount("tp")
+    let c1_two_putts = this.getCount("tc")
+    
+    this.circletwodataTarget.innerText = `${ pen_two_putts.toFixed(0) }`
+    this.circletwodata2Target.innerText = `${ c1_two_putts.toFixed(0) }`
+
+    if(all_circle_two_putts > 0)
+      this.circletwoputtTarget.innerText = `${((good_circle_two_putts / all_circle_two_putts)*100).toFixed(0)}%`
+    else
+      this.circletwoputtTarget.innerText = "None"
+  }
+  
+
+  setDriveStats() {
+    let pen_drives = this.getCount("bp")
+    let off_drives = this.getCount("bo")
+    let bad_drives = pen_drives + off_drives
+    let c2_drives = this.getCount("bt")
+    
+    this.drivedataTarget.innerText = `${ pen_drives.toFixed(0) }`
+    this.drivedata2Target.innerText = `${ c2_drives.toFixed(0) }`
+
+    this.driveaccuracyTarget.innerText = `${ ((1 - (bad_drives / 9))*100).toFixed(0)}%`
 
   }
 
-  parseShot() { //use the shotstring to create some useful arrays describing the user's round
-    let firstShotsExp = /^[b-t]|(?<=b)[b-t]/g
-    let drives = firstShotsExp.exec(this.shotstring)
-    let lastShotsExp = /[b-t](?=b)/g
-    let putts = lastShotsExp.exec(this.shotstring)
+  //complicated loop with three indexes
+  //it walks through the round and keeps track of which circles were hit in regulation
+  setGreenStats() {
+    let hole = 0
+    let shot = 0
+    let lies = this.shotstring.split('')
 
-    
-    
-    for(let i = 0; i < drives.length; i++){
-      switch (drives[i]) {
-      case 'b': //Ace
-        this.firstShots[0]++
-        break
-      case 'c': //Circle One
-        this.firstShots[1]++
-        break
-      case 't': //Circle Two
-        this.firstShots[2]++
-        break
-      case 'f': //Fairway
-        this.firstShots[3]++
-        break
-      case 'o': //Off-Fairway
-        this.firstShots[4]++
-        break
-      case 'p': //Penalty
-        this.firstShots[5]++
-        break
-      default:
-        break
+    for(let i = 0; i < lies.length; i++) {
+      shot++
+      if( shot + 2 <= this.pars[hole]) {
+        if(lies[i] == 'c') {
+          this.gircount++
+          this.greenone++
+          while(lies[i] != 'b')
+            i++
+        }
+        else if(lies[i] == 't') {
+          this.gircount++
+          this.greentwo++
+          while(lies[i] != 'b')
+            i++
+        }
+        else if(lies[i] == 'b') {
+          hole++
+          this.gircount++
+          shot = 0
+        }
       }
+      if(lies[i] == 'b') {
+        hole++
+        shot = 0
+      }
+
     }
 
-    for(let i = 0; i < putts.length; i++){
-      switch (putts[i]) {
-      case 'b': //Ace
-        this.lastShots[0]++
-        break
-      case 'c': //Circle One
-        this.lastShots[1]++
-        break
-      case 't': //Circle Two
-        this.lastShots[2]++
-        break
-      case 'f': //Fairway
-        this.lastShots[3]++
-        break
-      case 'o': //Off-Fairway
-        this.lastShots[4]++
-        break
-      case 'p': //Penalty
-        this.lastShots[5]++
-        break
-      default:
-        break
-      }
-    }
+    this.greendataTarget.innerText = `${this.greenone.toFixed(0)}`
+    this.greendata2Target.innerText = `${this.greentwo.toFixed(0)}`
+    this.greeninregulationTarget.innerText = `${(((this.gircount)/9)*100).toFixed(0)}%`
   }
-
 }
