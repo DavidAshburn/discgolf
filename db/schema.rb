@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_10_225811) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_16_154110) do
   create_table "cards", force: :cascade do |t|
     t.integer "score"
     t.integer "user_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_10_225811) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "shots"
+    t.integer "course_id"
     t.index ["user_id"], name: "index_cards_on_user_id"
     t.index ["variant_id"], name: "index_cards_on_variant_id"
   end

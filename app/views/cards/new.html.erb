@@ -120,6 +120,10 @@
     </div>
 
     <div>
+      <%= form.number_field :course_id, id: :card_course_id, value:Course.find_by(id: @variant.course_id).id %>
+    </div>
+
+    <div>
       <button type="submit" class="btn btn-primary">Finalize</button>
     </div>
   <% end %>
