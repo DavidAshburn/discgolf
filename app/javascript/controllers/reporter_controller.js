@@ -28,26 +28,48 @@ export default class extends Controller {
     this.setPars()
     this.parseShot()
     this.setStats()
+
+  }
+
+  //counts occurrences of a string within this.shotstring
+  //it's like a regex count with stupid matching
+  getCount(chars) {
+    let charlen = chars.length
+    let output = 0
+    for(let i = 0; i < this.shotstring.length; i++) {
+      if (this.shotstring.substr(i,charlen) == chars) {
+        output++
+        i += charlen - 1
+      }
+    }
+    return output
   }
 
   setStats() {
 
-    let good_circle_one_putts = /cb/g.exec(this.shotstring)
-    let all_circle_one_putts = /c[a-z]/g.exec(this.shotstring)
+    //Circle One Putting Stat
+    let good_circle_one_putts = this.getCount("cb")
+    let all_circle_one_putts = this.getCount("c")
 
-    let good_circle_two_putts = /tb/g.exec(this.shotstring)
-    let all_circle_two_putts = /t[a-z]/g.exec(this.shotstring)
+    if(all_circle_one_putts > 0)
+      this.circleoneputtTarget.innerText = `${((good_circle_one_putts / all_circle_one_putts)*100).toFixed(0)}%`
+    else 
+      this.circleoneputtTarget.innerText = "None"
+  
+    //Circle Two Putting Stat
+    let good_circle_two_putts = this.getCount("tb")
+    let all_circle_two_putts = this.getCount("t")
 
-    let bad_drives = /^o|^p|bo|bp/g.exec(this.shotstring)
-    if (!bad_drives) {
-      let bad_drives = []
-    }
+    if(all_circle_two_putts > 0)
+      this.circletwoputtTarget.innerText = `${((good_circle_two_putts / all_circle_two_putts)*100).toFixed(0)}%`
+    else
+      this.circletwoputtTarget.innerText = "None"
+
+    //Drive Accuracy Stat
+    let bad_drives = this.getCount("bp") + this.getCount("bo")
     
-    this.circleoneputtTarget.innerText = `${(good_circle_one_putts.length / all_circle_one_putts.length).toFixed(2)*100}%`
-    this.circletwoputtTarget.innerText = `${(good_circle_two_putts.length / all_circle_two_putts.length).toFixed(2)*100}%`
-    this.driveaccuracyTarget.innerText = `${((9 - bad_drives.length) / 9).toFixed(2)*100}%`
-
-
+    this.driveaccuracyTarget.innerText = `${ ((1 - (bad_drives / 9))*100).toFixed(0)}%`
+    
   }
 
   setPars() { //calculate and fill the total par
