@@ -7,7 +7,10 @@ export default class extends Controller {
     "totalpar",
     "score",
     "total",
-    "shotstring"
+    "shotstring",
+    "circleoneputt",
+    "circletwoputt",
+    "driveaccuracy"
     ];
 
   initialize() {
@@ -24,6 +27,27 @@ export default class extends Controller {
     this.setScores()
     this.setPars()
     this.parseShot()
+    this.setStats()
+  }
+
+  setStats() {
+
+    let good_circle_one_putts = /cb/g.exec(this.shotstring)
+    let all_circle_one_putts = /c[a-z]/g.exec(this.shotstring)
+
+    let good_circle_two_putts = /tb/g.exec(this.shotstring)
+    let all_circle_two_putts = /t[a-z]/g.exec(this.shotstring)
+
+    let bad_drives = /^o|^p|bo|bp/g.exec(this.shotstring)
+    if (!bad_drives) {
+      let bad_drives = []
+    }
+    
+    this.circleoneputtTarget.innerText = `${(good_circle_one_putts.length / all_circle_one_putts.length).toFixed(2)*100}%`
+    this.circletwoputtTarget.innerText = `${(good_circle_two_putts.length / all_circle_two_putts.length).toFixed(2)*100}%`
+    this.driveaccuracyTarget.innerText = `${((9 - bad_drives.length) / 9).toFixed(2)*100}%`
+
+
   }
 
   setPars() { //calculate and fill the total par
