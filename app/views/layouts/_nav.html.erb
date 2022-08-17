@@ -23,14 +23,13 @@
             Cards and Courses
           </a>
           <ul class="dropdown-menu">
-            <li><%= link_to "Add a Card", root_path, class:"nav-link active ms-3"%></li>
             <% if current_user.cards.first != nil %>
               <li><%= link_to "My Cards", cards_path, class:"nav-link active ms-3" %></li>
             <% end %>
             <li><hr class="dropdown-divider"></li>
             <li><%= link_to "Add a Course", new_course_path, class:"nav-link active ms-3"%></li>
             <% if current_user.courses.first != nil %>
-              <li><%= link_to "My Courses", home_my_courses_path, class:"nav-link active ms-3" %></li>
+              <li><%= link_to "My Courses", courses_path, class:"nav-link active ms-3" %></li>
             <% end %>
           </ul>
         </li>

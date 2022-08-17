@@ -1,6 +1,15 @@
-<tr>
-  <td><%= link_to course.name, course, class:"link-secondary" %></td>
-  <td><%= course.city %></td>
-  <td><%= course.state %></td>
-  <td><%= course.user_id %></td> 
-</tr>
+
+<div id="<%= dom_id course %>">
+
+  <div class="card w-80">
+    <h1 class="card-header text-center"><%= link_to "#{course.name}", course %></h1>
+    <div class="card-body">
+      <h5 class="card-title text-center text-muted"> <%= "#{course.city}, #{course.state}"%>
+      <% course.variants.each do |variant| %>
+        <h6 class="card-title text-center text-muted"><%= variant.name %></h5>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+  

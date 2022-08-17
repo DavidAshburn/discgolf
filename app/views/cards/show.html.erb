@@ -15,7 +15,7 @@
       <table class="table table-success text-center">
         <thead>
           <tr>
-            <th scope="col" class="border border-light border-4 rounded">1</th>
+            <th scope="col" class="border border-light border-4">1</th>
             <th scope="col" class="border border-light border-4">2</th>
             <th scope="col" class="border border-light border-4">3</th>
             <th scope="col" class="border border-light border-4">4</th>
@@ -29,19 +29,19 @@
         </thead>
         <tbody>
           <tr class="table-primary"> <!-- taking data from the cards_controller into reporter_controller.js here -->
-            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.one %></em></small></small></th>
-            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.two %></em></small></th>
-            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.three %></em></small></th>
-            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.four %></em></small></th>
-            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.five %></em></small></th>
-            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.six %></em></small></th>
-            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.seven %></em></small></th>
-            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.eight %></em></small></th>
-            <th scope="col" class="border border-light border-4" data-reporter-target="holepar"><small><em><%= thisvariant.nine %></em></small></th>
-            <th scope="col" class="border border-light border-4"><small><em data-reporter-target="totalpar"></em></small></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.one %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.two %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.three %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.four %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.five %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.six %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.seven %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.eight %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.nine %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted"><em data-reporter-target="totalpar"></em></th>
           </tr>
           <tr>
-            <td class="border border-light border-4" data-reporter-target="score" data-action="mouseover->reporter#loadStyle"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
             <td class="border border-light border-4" data-reporter-target="score"></td>
             <td class="border border-light border-4" data-reporter-target="score"></td>
             <td class="border border-light border-4" data-reporter-target="score"></td>
@@ -112,7 +112,6 @@
           <td data-reporter-target="greeninregulation"></td>
         </tr>
       </table>
-      <%= @card.shots %>
       <br>
       <div class="row">
         <div class="d-grid gap-2">

@@ -7,10 +7,5 @@
     <% if card.user_id == current_user.id %>
       <%= render card %>
     <% end %>
-    <p>
-      <%= link_to "Show this card", card %>
-    </p>
   <% end %>
 </div>
-
-<%= link_to "New card", new_card_path %>

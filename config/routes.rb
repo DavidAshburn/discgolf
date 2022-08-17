@@ -6,8 +6,6 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
   get 'home/about'
-  get 'home/profile'
-  get 'home/my_courses'  
-  get 'play/around'
+  get 'home/profile' 
 
 end

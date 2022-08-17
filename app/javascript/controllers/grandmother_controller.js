@@ -16,6 +16,16 @@ export default class extends Controller {
   "shotsout" //hidden form
   ]
 
+  static classes = [
+    "albatross",
+    "eagle",
+    "birdie",
+    "par",
+    "bogey",
+    "double",
+    "triple"
+    ]
+
   initialize() {
     this.thisscore = 0
     this.thishole = 1
@@ -25,6 +35,7 @@ export default class extends Controller {
     this.total = 0
     this.totalpar = 0
     this.shotstring = ""
+    this._updateScores()
   }
 
   connect() {
@@ -41,6 +52,7 @@ export default class extends Controller {
     this.totalparTarget.innerText = this.totalpar
 
     this._updateOutput()
+
   }
 
   shotInc() {
@@ -83,8 +95,9 @@ export default class extends Controller {
       this.thisholeTarget.innerText = "9 Holes"
 
       this.scoreoutTarget.innerHTML = this.total
-      this.shotsoutTarget.innerText = this.shotstring
+      //this.shotsoutTarget.innerText = this.shotstring
     }
+    this.setStyles()
   }
 
   writeBasket() {
@@ -128,6 +141,7 @@ export default class extends Controller {
       this.total += this.scorelist[i]
     }
     this.totalTarget.innerText = this.total
+    this.shotsoutTarget.innerText = this.shotstring
   }
 
 
@@ -135,5 +149,41 @@ export default class extends Controller {
     this.thisholeTarget.innerText = `Hole: ${this.thishole}`
     this.thisscoreTarget.innerText = `Score: ${this.thisscore}`
     this.thisparTarget.innerText = `Par: ${this.thispar}`
+  }
+
+  setStyles() {
+    
+    let difference = 0
+    for(let i = 0; i < 9; i++) {
+
+      difference = this.scorelist[i] - this.parlist[i]
+      if(this.scorelist[i] > 0) {
+        switch(difference) {
+          case -3:
+            this.scoreTargets[i].classList.add(this.albatrossClass)
+            break
+          case -2:
+             this.scoreTargets[i].classList.add(this.eagleClass)
+            break
+          case -1:
+             this.scoreTargets[i].classList.add(this.birdieClass)
+            break
+          case 0:
+             this.scoreTargets[i].classList.add(this.parClass)
+            break
+          case 1:
+             this.scoreTargets[i].classList.add(this.bogeyClass)
+            break
+          case 2:
+             this.scoreTargets[i].classList.add(this.doubleClass)
+            break
+          case 3:
+             this.scoreTargets[i].classList.add(this.tripleClass)
+            break
+          default:
+            break
+        }
+      }
+    }
   }
 };
