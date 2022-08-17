@@ -26,16 +26,24 @@
     <table class="table">
       <thead>
         <th scope="col">Course</th>
+        <th scope="col">Layout</th>
         <th scope="col">Par</th>
         <th scope="col">Score</th>
-        <th scopt="col">Date</th>
       </thead>
       <tbody>
-        <%# loop through the players cards and add 4 recent rounds to table %>
-        <td>stuff here</td>
-        <td>stuff here</td>
-        <td>stuff here</td>
-        <td>stuff here</td>
+        <% if @cards != 0 %>
+          <% @cards.each do |card|%>
+          <% course = Course.find_by(id: card.course_id) %>
+          <% variant = Variant.find_by(id: card.variant_id) %>
+          <% par = variant.one.to_i + variant.two.to_i + variant.three.to_i + variant.four.to_i + variant.five.to_i + variant.six.to_i + variant.seven.to_i + variant.eight.to_i + variant.nine.to_i %>
+          <tr class="align-middle">
+            <td><%= link_to card.course.name, course, class: "btn btn-primary btn-sm" %></td>
+            <td><%= link_to variant.name, new_card_path( variant_id: variant.id ), class:"btn btn-outline-success btn-sm" %></td>
+            <td><%= par %></td>
+            <td><%= link_to card.score, card, class: "btn btn-success" %></td>
+          </tr>
+          <% end %>
+        <% end %>
       </tbody>
     </table>
     <p class="nav-item">
