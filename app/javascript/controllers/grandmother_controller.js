@@ -57,10 +57,8 @@ export default class extends Controller {
 
   // just adds 1 to thisscore and updates output
   shotInc() {
-    if(this.thishole < 10) {
-      this.thisscore++
-      this._updateOutput()
-    }
+    this.thisscore++
+    this._updateOutput()
   }
 
   // reduces score and slices last entry off of shotstring
@@ -120,30 +118,36 @@ export default class extends Controller {
   //all of these just put the correct character onto shotstring
   writeBasket() {
     if(this.thishole < 10){
+      this.shotInc()
       this.shotstring = this.shotstring.concat('b')
+      this.holeInc() //send to the next hole automatically to prevent bad input
     }
   }
 
   writeCircleOne() {
     if(this.thishole < 10){
+      this.shotInc()
       this.shotstring = this.shotstring.concat('c')
     }
   }
 
   writeCircleTwo() {
     if(this.thishole < 10){
+      this.shotInc()
       this.shotstring = this.shotstring.concat('t')
     }
   }
 
   writeFairway() {
     if(this.thishole < 10){
+      this.shotInc()
       this.shotstring = this.shotstring.concat('f')
     }
   }
 
   writeOffFairway() {
     if(this.thishole < 10){
+      this.shotInc()
       this.shotstring = this.shotstring.concat('o')
     }
   }
@@ -151,6 +155,7 @@ export default class extends Controller {
   //accounting for the extra penalty stroke here
   writePenalty() {
     if(this.thishole < 10){
+      this.shotInc()
       this.shotstring = this.shotstring.concat('p')
       this.thisscore++
     }
@@ -158,9 +163,23 @@ export default class extends Controller {
 
   //goes back one hole but this will mess up the shotlist with the current implementation
   holePrevious() {
-    if (this.thishole > 10) {
+    if (this.thishole < 10) {
       this.thishole--
+
+      //erase the current hole, and the basket from the previous hole
+      let last_basket = 0
+      let shot_array = this.shotstring.split("")
+      shot_array.shift()
+      for(let i = shot_array.length - 1; shot_array[i] != 'b'; i--) {
+        shot_array.pop()
+      }
+      shot_array.pop()
+      this.shotstring = shot_array.join('')
+
       this.thisscore = this.scorelist[this.thishole-1]
+      this._updateScores()
+      this._updateOutput()
+      this.thisscore--
       this._updateOutput()
     }
   }
