@@ -41,7 +41,8 @@ class VariantsController < ApplicationController
   def update
     respond_to do |format|
       if @variant.update(variant_params)
-        format.html { redirect_to variant_url(@variant), notice: "Variant was successfully updated." }
+        course = Course.find_by(id: @variant.course_id)
+        format.html { redirect_to course, notice: "Variant was successfully updated." }
         format.json { render :show, status: :ok, location: @variant }
       else
         format.html { render :edit, status: :unprocessable_entity }
