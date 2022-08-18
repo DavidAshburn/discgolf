@@ -7,8 +7,5 @@ import { application } from "./application"
 import GrandmotherController from "./grandmother_controller"
 application.register("grandmother", GrandmotherController)
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import ReporterController from "./reporter_controller"
 application.register("reporter", ReporterController)
