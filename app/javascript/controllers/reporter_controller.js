@@ -228,7 +228,7 @@ export default class extends Controller {
     let scramble_count = 0
     let char = ""
 
-    for(let i = 0; i < lies.length; i++) { //loop through this.shot_array and pick out substrings for each hole
+    for(let i = 0; i < this.shot_array.length; i++) { //loop through this.shot_array and pick out substrings for each hole
       char = this.shot_array[i]
       temp.push(char)
       if(char == 'b') {  //we have a hole's substring in temp, so we pass it into greenInReg() with the hole index
