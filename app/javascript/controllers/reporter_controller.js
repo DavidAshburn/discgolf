@@ -16,6 +16,7 @@ export default class extends Controller {
     "circletwodata2",
     "drivedata",
     "drivedata2",
+    "scrambledata",
     "driveaccuracy",
     "greendata",
     "greendata2",
@@ -48,6 +49,7 @@ export default class extends Controller {
     this.setCircleTwoStats()
     this.setDriveStats()
     this.setGreenStats()
+    this.setScramble()
 
   }
 
@@ -67,7 +69,7 @@ export default class extends Controller {
     this.shot_array = this.shotstring.split("")
     let hole_score = 0
     let hole_index = 0
-
+    this.shot_array.shift()
     //walk through the shotstring to get our scores per hole
     //there's a special character at shot_array[0] so I check for specific codes
     
@@ -151,9 +153,10 @@ export default class extends Controller {
     let off_drives = this.getCount("bo") //drives off-fairway
     let bad_drives = penalty_drives + off_drives
     let c2_drives = this.getCount("bt") //drives into c2
+    let c1_drives = this.getCount("bc") //drives into c1
     
     this.drivedataTarget.innerText = `${ penalty_drives.toFixed(0) }`
-    this.drivedata2Target.innerText = `${ c2_drives.toFixed(0) }`
+    this.drivedata2Target.innerText = `${ (c2_drives + c1_drives).toFixed(0) }`
 
     this.driveaccuracyTarget.innerText = `${ ((1 - (bad_drives / 9))*100).toFixed(0)}%`
 
@@ -166,12 +169,12 @@ export default class extends Controller {
     //hole indexes this.pars so we can check if the player is on the green in regulation
     let hole = 0
     let shot = 0
-    let lies = this.shotstring.split('')
+    let lies = this.shot_array
     let greenone = 0 //counters
     let greentwo = 0 //
     let gircount = 0 //
 
-    //walk through the round again
+    //walk through the round
     for(let i = 0; i < lies.length; i++) {
       shot++
       //if we are in regulation (two shots left to make par)
@@ -198,12 +201,46 @@ export default class extends Controller {
         hole++
         shot = 0 //reset hole score at end of hole
       }
-
     }
 
     this.greendataTarget.innerText = `${greenone.toFixed(0)}`
     this.greendata2Target.innerText = `${greentwo.toFixed(0)}`
     this.greeninregulationTarget.innerText = `${(((gircount)/9)*100).toFixed(0)}%`
+  }
+
+  //input: the substring for a hole's strokes and the hole index
+  //it returns true if the player hit the green in regulation
+  greenInReg(chars,hole) {
+    let len = chars.length
+    for(let i = 1; i <= this.pars[hole] - 2; i++) { //i only goes up to par-2, it only checks shots in regulation
+      let shot = chars.charAt(i-1)
+      if (shot == 'c' || shot == 't' || shot == 'b') //if you hit the green or basket in regulation return true
+        return true
+    }
+    return false //if there is no green or basket in regulation
+  }
+
+  setScramble() {
+    //keep track of current hole and current player score, this.shotstring is more useful as an array here
+    //hole indexes this.pars so we can check if the player is on the green in regulation
+    let hole = 0
+    let temp = []
+    let scramble_count = 0
+    let char = ""
+
+    for(let i = 0; i < lies.length; i++) { //loop through this.shot_array and pick out substrings for each hole
+      char = this.shot_array[i]
+      temp.push(char)
+      if(char == 'b') {  //we have a hole's substring in temp, so we pass it into greenInReg() with the hole index
+        if( !this.greenInReg(temp.join(), hole) ) {
+          if(this.scorelist[hole] <= this.pars[hole])
+            scramble_count++ // if the green wasn't in regulation but the score was <= par
+        }
+        hole++ 
+        temp = [] //reset loop variables
+      }
+    }
+    this.scrambledataTarget.innerText = `${scramble_count.toFixed(0)}`
   }
 
 
@@ -212,9 +249,9 @@ export default class extends Controller {
     let difference = 0
     for(let i = 0; i < 9; i++) {
 
-      difference = this.scorelist[i] - this.pars[i]
+      difference = this.scorelist[i] - this.pars[i] //check the over/under on each hole
 
-      switch(difference) {
+      switch(difference) { //assign the appropriate class for styling
         case -3:
           this.scoreTargets[i].classList.add(this.albatrossClass)
           break
@@ -242,19 +279,3 @@ export default class extends Controller {
     }
   }
 }
-
-/*
-    "albatross",
-    "eagle",
-    "birdie",
-    "par",
-    "bogey",
-    "doubleBogey",
-    "tripleBogey"
-
-    this.shotstring = this.shotstringTarget.innerText
-    this.scorelist = [0,0,0,0,0,0,0,0,0] //setScores()  setStyles()
-    this.totalpar = 0 //setPars()
-    this.pars = [] //setPars()  setGreenStats()  setStyles()
-    this.shot_array = [] //setScores()  setStyles()
-*/
