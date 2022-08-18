@@ -55,6 +55,7 @@ export default class extends Controller {
 
   }
 
+  // just adds 1 to thisscore and updates output
   shotInc() {
     if(this.thishole < 10) {
       this.thisscore++
@@ -62,6 +63,7 @@ export default class extends Controller {
     }
   }
 
+  // reduces score and slices last entry off of shotstring
   shotUndo() {
     if(this.thishole > 1 && this.thishole < 10) {
       this.thisscore--
@@ -72,6 +74,19 @@ export default class extends Controller {
       this._updateOutput()
     }
   }
+
+  /* holeInc()
+    during the round: put thisscore to scorelist 
+                        increment thishole 
+                        pull thisscore from next on scorelist
+                        pul thispar from next on scorelist
+
+                        update scores and output
+     end of the round: put thisscore to scorelist
+                        increment thishole to make holeInc() safe
+                        update scores
+                        update output to game-end version
+  */                  
 
   holeInc() {
     if(this.thishole < 9){
@@ -100,6 +115,7 @@ export default class extends Controller {
     this.setStyles()
   }
 
+  //all of these just put the correct character onto shotstring
   writeBasket() {
     this.shotstring = this.shotstring.concat('b')
   }
@@ -126,6 +142,7 @@ export default class extends Controller {
     this.thisscore++
   }
 
+  //goes back one hole but this will mess up the shotlist with the current implementation
   holePrevious() {
     if (this.thishole > 1) {
       this.thishole--
@@ -134,6 +151,7 @@ export default class extends Controller {
     }
   }
 
+  //update shots on scoreboard and total
   _updateScores() {
     this.total = 0
     for(let i = 0; i < 9; i++){

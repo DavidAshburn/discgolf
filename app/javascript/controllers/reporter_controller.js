@@ -69,9 +69,16 @@ export default class extends Controller {
     let hole_index = 0
 
     //walk through the shotstring to get our scores per hole
+    //there's a special character at shot_array[0] so I check for specific codes
+    
     for(let i = 0; i < this.shot_array.length; i++) {
-      hole_score++
-      if (this.shot_array[i] == 'b') { //when we hit a basket, log the score and reset let variables
+      let char = this.shot_array[i]
+      if (char == 'f' || char == 'o' || char == 'c' || char == 't')
+        hole_score++
+      if (char == 'p')
+        hole_score += 2
+      if (char == 'b') { //when we hit a basket, log the score and reset let variables
+        hole_score++
         this.scorelist[hole_index] = hole_score
         hole_index++
         hole_score = 0
@@ -86,7 +93,7 @@ export default class extends Controller {
       score_sum += this.scorelist[scorelist_index]
       scorelist_index++
     });
-    this.totalTarget.innerText = score_sum + this.getCount("p") //penalties count for two strokes
+    this.totalTarget.innerText = score_sum
   }
 
 
