@@ -89,62 +89,76 @@ export default class extends Controller {
   */                  
 
   holeInc() {
-    if(this.thishole < 9){
-      this.scorelist[this.thishole-1] = this.thisscore
+    if(this.shotstring.charAt(this.shotstring.length-1) == 'b'){
+      if(this.thishole < 9){
+        this.scorelist[this.thishole-1] = this.thisscore
 
-      this.thishole++
-      this.thisscore = this.scorelist[this.thishole-1]
-      this.thispar = this.parlist[this.thishole-1]
-      
-      this._updateScores()
-      this._updateOutput()
+        this.thishole++
+        this.thisscore = this.scorelist[this.thishole-1]
+        this.thispar = this.parlist[this.thishole-1]
+        
+        this._updateScores()
+        this._updateOutput()
+      }
+      else if (this.thishole == 9){ // on the "10th" hole, we update the par and score to be totals for the course, //and prepare hidden fields?//
+        this.scorelist[this.thishole-1] = this.thisscore
+        this.thishole++
+
+        this._updateScores()
+
+        this.thisscoreTarget.innerText = `Score: ${this.total}`
+        this.thisparTarget.innerText = `Par: ${this.totalpar}`
+        this.thisholeTarget.innerText = "9 Holes"
+
+        this.scoreoutTarget.innerHTML = this.total
+        //this.shotsoutTarget.innerText = this.shotstring
+      }
+      this.setStyles()
     }
-    else if (this.thishole == 9){ // on the "10th" hole, we update the par and score to be totals for the course, //and prepare hidden fields?//
-      this.scorelist[this.thishole-1] = this.thisscore
-      this.thishole++
-
-      this._updateScores()
-
-      this.thisscoreTarget.innerText = `Score: ${this.total}`
-      this.thisparTarget.innerText = `Par: ${this.totalpar}`
-      this.thisholeTarget.innerText = "9 Holes"
-
-      this.scoreoutTarget.innerHTML = this.total
-      //this.shotsoutTarget.innerText = this.shotstring
-    }
-    this.setStyles()
   }
 
   //all of these just put the correct character onto shotstring
   writeBasket() {
-    this.shotstring = this.shotstring.concat('b')
+    if(this.thishole < 10){
+      this.shotstring = this.shotstring.concat('b')
+    }
   }
 
   writeCircleOne() {
-    this.shotstring = this.shotstring.concat('c')
+    if(this.thishole < 10){
+      this.shotstring = this.shotstring.concat('c')
+    }
   }
 
   writeCircleTwo() {
-    this.shotstring = this.shotstring.concat('t')
+    if(this.thishole < 10){
+      this.shotstring = this.shotstring.concat('t')
+    }
   }
 
   writeFairway() {
-    this.shotstring = this.shotstring.concat('f')
+    if(this.thishole < 10){
+      this.shotstring = this.shotstring.concat('f')
+    }
   }
 
   writeOffFairway() {
-    this.shotstring = this.shotstring.concat('o')
+    if(this.thishole < 10){
+      this.shotstring = this.shotstring.concat('o')
+    }
   }
 
   //accounting for the extra penalty stroke here
   writePenalty() {
-    this.shotstring = this.shotstring.concat('p')
-    this.thisscore++
+    if(this.thishole < 10){
+      this.shotstring = this.shotstring.concat('p')
+      this.thisscore++
+    }
   }
 
   //goes back one hole but this will mess up the shotlist with the current implementation
   holePrevious() {
-    if (this.thishole > 1) {
+    if (this.thishole > 10) {
       this.thishole--
       this.thisscore = this.scorelist[this.thishole-1]
       this._updateOutput()

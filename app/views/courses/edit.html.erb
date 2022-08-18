@@ -1,4 +1,6 @@
-<br><br>
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
 <div class="p-3 mb-2 bg-success bg-gradient text-white fs-4" style="border-radius:15px">Edit Course</div>
 
 <%= render "form", course: @course %>

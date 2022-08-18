@@ -1,3 +1,6 @@
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
 <p>Hello <%= @email %>!</p>
 
 <% if @resource.try(:unconfirmed_email?) %>

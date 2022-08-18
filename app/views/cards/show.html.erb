@@ -1,4 +1,6 @@
-
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
 <div data-controller="reporter"  data-reporter-albatross-class="bg-dark bg-gradient text-white" data-reporter-eagle-class="bg-info bg-gradient" data-reporter-birdie-class="bg-primary bg-gradient" data-reporter-par-class="bg-success bg-gradient" data-reporter-bogey-class="bg-secondary bg-gradient" data-reporter-double-class="bg-warning bg-gradient" data-reporter-triple-class="bg-danger bg-gradient">
   <% thiscourse = Course.find_by(id: @card.course_id) %>
   <% thisvariant = Variant.find_by(id: @card.variant_id) %>

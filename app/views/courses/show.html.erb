@@ -1,4 +1,6 @@
-<br><br>
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
 <div class="card w-80">
   <h1 class="card-header text-center"><%= @course.name %></h5>
   <div class="card-body">

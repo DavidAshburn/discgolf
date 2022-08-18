@@ -1,3 +1,6 @@
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
 <p>Hello <%= @resource.email %>!</p>
 
 <p>Your account has been locked due to an excessive number of unsuccessful sign in attempts.</p>
