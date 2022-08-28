@@ -1,1 +1,24 @@
-<h1>About Us</h1>
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
+<div class="px-4 pt-5 my-0 text-center border-bottom">
+    <h1 class="display-4 fw-bold mb-3">There's no crying in Disc Golf</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Practice beats talent every time, enough practice anyways.</p>
+      <blockquote class="blockquote">
+        <p>Now, get out there and pecker-slap those bastards!</p>
+      </blockquote>
+      <figcaption class="blockquote-footer">
+          Patches O'houlihan
+      </figcaption>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+        <%= link_to "Coach's Unneccessary Twitter", "https://twitter.com/Coach", type: "button", class:"btn btn-primary btn-lg px-4" %>
+        <%= link_to "Sign Up Sheet", new_user_registration_path, type: "button", class:"btn btn-outline-secondary btn-lg px-4" %>
+      </div>
+    </div>
+    <div class="overflow-hidden" style="max-height: 30vh;">
+      <div class="container px-5">
+        <%= image_tag("patches.jpg", class: "img-fluid border rounded-3 shadow-lg mb-4", width: '292', alt: "A gawd-dam champion", loading: "lazy") %>
+      </div>
+    </div>
+</div>
