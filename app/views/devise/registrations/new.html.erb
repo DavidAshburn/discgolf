@@ -1,0 +1,49 @@
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
+<div class="row">
+  <div class="col-sm-4">
+    <br/>
+    <div class="card">
+      <div class="card-header">
+          <h2>Sign up</h2>
+      </div>
+      <div class="card-body">
+
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="mb-3">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", placeholder:"Email" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.password_field :password, autocomplete: "new-password", class:"form-control", placeholder:"Password" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", placeholder:"Confirm Password" %>
+            <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+          </div>
+
+          <div class="col-1">
+            <%= f.submit "My body is ready", class:"btn btn-primary btn-lg"%>
+          </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class = "row">
+  <div class="col-sm-4">
+      <br/>
+      <div class="card">
+        <div class="card-header">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
+  </div>
+</div>
