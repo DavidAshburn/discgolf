@@ -15,50 +15,67 @@
       <% @variant.name = "Enter Name" %>
     <% end %>
 
-    <%= form.text_field :name, class:"form-control", placeholder: @variant.name %>
-    <button type="button" class="btn btn-outline-primary" data-variants-target="lengthbutton" data-action="variants#toggleLength"></button>
+    <div class="row">
+      <div class = "col-9">
+        <%= form.text_field :name, class:"form-control", placeholder: "Layout Name" %>
+      </div>
+    </div>
+
+    
+
+    <% parray = [] %>
+    <% (0..8).each do |x| %>
+      <% parray.push(3) %>
+    <% end %>
+
+    <% if @length == '18' %>
+      <% (9..17).each do |x| %>
+        <% parray.push(3) %>
+      <% end %>
+    <% end %>
 
     <table class="table table-sm">
-    <thead>
-      <tr>
-        <th scope="col">Pars</th>
-      </tr>
-    </thead>
-    <tbody class="text-center align-middle">
-      <div>
-        <tr>
-          <% (1..9).each do |i| %>
-            <td><b><%= i %></b></td>
-          <% end %>
+      <thead>
+        <tr class="row">
+          <th class="col-2 text-center">#</th>
+          <th class="col-2 text-center">Par</th>
         </tr>
-        <tr>
-          <% (1..9).each do |i| %>
-            <button type="button" class="btn btn-secondary btn-sml" data-variants-target="parbutton" data-action="variants#parButton">3</button>
+      </thead>
+      <tbody class="text-center align-middle">
+        <% (0..8).each do |x| %>
+          <tr class="row">
+            <td class="col-2"><b><%= x + 1 %></b></td>
+            <td class="col-2">
+              <select class="form-select", value="3", data-variants-target="parsin", data-action="variants#parupdate">
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </td>
+          </tr>
+        <% end %>
+        <% if @length == '18' %>
+          <% (9..17).each do |x| %>
+            <tr class="row">
+              <td class="col-2"><b><%= x + 1 %></b></td>
+              <td class="col-2">
+                <select class="form-select", value="3", data-variants-target="parsin", data-action="variants#parupdate">
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </td>
+            </tr>
           <% end %>
-        </tr>
-      </div>
-      <div data-variants-target="eighteen" class="visualy-hidden">
-        <tr>
-          <% (10..18).each do |i| %>
-            <td><b><%= i %></b></td>
-          <% end %>
-        </tr>
-        <tr>
-          <% (10..18).each do |i| %>
-            <button type="button" class="btn btn-secondary btn-sml" data-variants-target="parbutton" data-action="variants#parButton">3</button>
-          <% end %>
-        </tr>
-      </div>
-      <tr>
-        <button type="button" class="btn btn-primary" data-action="variants#setPars">Update Pars</button>
-      </tr>
-      
-    </tbody>
-  </table>
+        <% end %>
+      </tbody>
+    </table>
+
   <div class="row, pt-1">
-    <%= form.number_field :course_id, id: :variant_course_id, value:course_id, class: "visually-hidden" %>
-    <%= form.number_field :length, data: {target: "variants.lengthout" }, class: "visually-hidden" %>
-    <%= form.text_field :pars, data: {target: "variants.parsout" }, class: "visually-hidden"  %>
+    <%= form.number_field :course_id, id: :variant_course_id, value: course_id, class: "visually-hidden" %>
+    <%= form.number_field :length, value: @length, class: "visually-hidden" %>
+    
+    <%= form.text_field :pars, data: { target: "variants.parsout" } %>
   </div>
   <%= form.submit "Save Layout", class:"btn btn-success" %>
 

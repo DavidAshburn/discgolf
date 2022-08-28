@@ -13,10 +13,13 @@ class VariantsController < ApplicationController
   # GET /variants/new
   def new
     @variant = Variant.new
+    @course_id = params[:course_id]
+    @length = params[:length]
   end
 
   # GET /variants/1/edit
   def edit
+    @course = Course.find(@variant.course_id)
   end
 
   # POST /variants or /variants.json
@@ -52,7 +55,7 @@ class VariantsController < ApplicationController
     @variant.destroy
 
     respond_to do |format|
-      format.html { redirect_to variants_url, notice: "Variant was successfully destroyed." }
+      format.html { redirect_to courses_url, notice: "Variant was successfully destroyed." }
       format.json { head :no_content }
     end
   end

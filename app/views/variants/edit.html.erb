@@ -15,74 +15,47 @@
     </div>
   <% end %>
 
-<%= form.text_field :name, class:"form-control", value: @variant.name %>
+<div class="row">
+  <div class = "col-9">
+    <%= form.text_field :name, class:"form-control", value: @variant.name %>
+  </div>
+</div>
 
-<table class="table table-sm">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Par</th>
-    </tr>
-  </thead>
-  <tbody class="text-center align-middle">
-    <tr>
-      <td><b>1</b></td>
-      <td>
-        <%= form.text_field :one, class:"form-control", value:@variant.one %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>2</b></td>
-      <td>      
-        <%= form.text_field :two, class:"form-control", value:@variant.two %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>3</b></td>
-      <td>
-        <%= form.text_field :three, class:"form-control", value:@variant.three  %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>4</b></td>
-      <td>
-        <%= form.text_field :four, class:"form-control", value:@variant.four  %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>5</b></td>
-      <td>
-        <%= form.text_field :five, class:"form-control", value:@variant.five  %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>6</b></td>
-      <td>
-        <%= form.text_field :six, class:"form-control", value:@variant.six  %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>7</b></td>
-      <td>
-        <%= form.text_field :seven, class:"form-control", value:@variant.seven  %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>8</b></td>
-      <td>
-        <%= form.text_field :eight, class:"form-control", value:@variant.eight  %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>9</b></td>
-      <td>
-        <%= form.text_field :nine, class:"form-control", value:@variant.nine  %>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<% if @variant.pars %>
+  <% parray = @variant.pars.split('') %>
 
-<%= form.submit class:"btn btn-success" %>
+
+  <table class="table table-sm">
+    <thead>
+      <tr class="row">
+        <th class="col-2 text-center">#</th>
+        <th class="col-2 text-center">Par</th>
+      </tr>
+    </thead>
+    <tbody class="text-center align-middle">
+      <% (0..8).each do |x| %>
+        <tr class="row">
+          <td class="col-2"><b><%= x + 1 %></b></td>
+          <td class="col-2">
+            <%= form.text_field :pars, class:"form-control", value:parray[x] %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @variant.length == 18 %>
+        <% (9..17).each do |x| %>
+        <tr class="row">
+          <td class="col-2"><b><%= x + 1 %></b></td>
+          <td class="col-2">
+            <%= form.text_field :pars, class:"form-control", value:parray[x] %>
+          </td>
+        </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= form.submit "Edit Layout", class:"btn btn-success" %>
 
 <% end %>
 
@@ -90,3 +63,4 @@
 <br>
 
 <%= link_to "Back to Course", @course, class:"btn btn-outline-dark" %>
+ <%= button_to "Destroy this layout", @variant, class:"btn btn-outline-danger mt-2 mb-4", method: :delete %>
