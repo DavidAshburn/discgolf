@@ -1,10 +1,179 @@
-<p style="color: green"><%= notice %></p>
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
+<div data-controller="reporter"  data-reporter-albatross-class="bg-dark bg-gradient text-white" data-reporter-eagle-class="bg-info bg-gradient" data-reporter-birdie-class="bg-primary bg-gradient" data-reporter-par-class="bg-success bg-gradient" data-reporter-bogey-class="bg-secondary bg-gradient" data-reporter-double-class="bg-warning bg-gradient" data-reporter-triple-class="bg-danger bg-gradient">
+  <% thiscourse = Course.find_by(id: @card.course_id) %>
+  <% thisvariant = Variant.find_by(id: @card.variant_id) %>
+  <div style="display: none;">
+    <p data-reporter-target="shotstring"> <%= @card.shots %> </p>
+  </div>
+  <br><br>
+  <div class="card w-80">
+    <h1 class="card-header text-center"><%= thiscourse.name %></h1>
+    <div class="card-body">
+      <h5 class="card-title text-center text-muted"><%= thisvariant.name %></h5>
+      <h6 class="card-title text-center text-muted"><%= @card.created_at.to_fs(:long)[0..-6] %></h6>
 
-<%= render @card %>
+      <table class="table table-success text-center">
+        <thead>
+          <tr>
+            <th scope="col" class="border border-light border-4">1</th>
+            <th scope="col" class="border border-light border-4">2</th>
+            <th scope="col" class="border border-light border-4">3</th>
+            <th scope="col" class="border border-light border-4">4</th>
+            <th scope="col" class="border border-light border-4">5</th>
+            <th scope="col" class="border border-light border-4">6</th>
+            <th scope="col" class="border border-light border-4">7</th>
+            <th scope="col" class="border border-light border-4">8</th>
+            <th scope="col" class="border border-light border-4">9</th>
+            <th scope="col" class="border border-light border-4">T</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-primary"> <!-- taking data from the cards_controller into reporter_controller.js here -->
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.one %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.two %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.three %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.four %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.five %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.six %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.seven %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.eight %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.nine %></em></th>
+            <th scope="col" class="border border-light border-4 text-muted"><em data-reporter-target="totalpar"></em></th>
+          </tr>
+          <tr>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="score"></td>
+            <td class="border border-light border-4" data-reporter-target="total"></td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table">
+        
+        <tr class="table-primary">
+          <th scope="row border border-light border-4">Tee Pad</th>
+          <td><small data-reporter-target="nodata"></small>
+            <!-- space for icon -->
+          </td>
+          <td><small data-reporter-target="drivedata"></small>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+            </svg>
+          </td>
+          <td><small data-reporter-target="drivedata2"></small>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-2-circle" viewBox="0 0 16 16">
+            <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM6.646 6.24v.07H5.375v-.064c0-1.213.879-2.402 2.637-2.402 1.582 0 2.613.949 2.613 2.215 0 1.002-.6 1.667-1.287 2.43l-.096.107-1.974 2.22v.077h3.498V12H5.422v-.832l2.97-3.293c.434-.475.903-1.008.903-1.705 0-.744-.557-1.236-1.313-1.236-.843 0-1.336.615-1.336 1.306Z"></path>
+            </svg>
+          </td>
+          <td data-reporter-target="driveaccuracy"></td>
+        </tr>
 
-<div>
-  <%= link_to "Edit this card", edit_card_path(@card) %> |
-  <%= link_to "Back to cards", cards_path %>
+        <tr class="table-primary">
+          <th scope="row border border-light border-4">Circle One</th>
+          <td><small data-reporter-target="nodata"></small>
+            <!-- space for icon -->
+          </td>
+          <td><small data-reporter-target="circleonedata"></small>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+            </svg>
+          </td>
+          <td><small data-reporter-target="circleonedata2"></small>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-1-circle" viewBox="0 0 16 16">
+            <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"></path>
+            </svg>
+          </td>
+          <td data-reporter-target="circleoneputt"></td>
+        </tr>
 
-  <%= button_to "Destroy this card", @card, method: :delete %>
+        <tr class="table-primary">
+          <th scope="row border border-light border-4">Circle Two</th>
+          <td><small data-reporter-target="nodata"></small>
+            <!-- space for icon -->
+          </td>
+          <td><small data-reporter-target="circletwodata"></small>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+            </svg>
+          </td>
+          <td><small data-reporter-target="circletwodata2"></small>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-1-circle" viewBox="0 0 16 16">
+            <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"></path>
+            </svg>
+          </td>
+          <td data-reporter-target="circletwoputt"></td>
+        </tr>
+
+        <tr class="table-primary">
+          <th scope="row border border-light border-4">Greens in Regulation</th>
+          <td><small data-reporter-target="scrambledata"></small>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-yin-yang" viewBox="0 0 16 16">
+            <path d="M9.167 4.5a1.167 1.167 0 1 1-2.334 0 1.167 1.167 0 0 1 2.334 0Z"></path>
+            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM1 8a7 7 0 0 1 7-7 3.5 3.5 0 1 1 0 7 3.5 3.5 0 1 0 0 7 7 7 0 0 1-7-7Zm7 4.667a1.167 1.167 0 1 1 0-2.334 1.167 1.167 0 0 1 0 2.334Z"></path>
+            </svg>
+          </td>
+          <td><small data-reporter-target="greendata"></small>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-1-circle" viewBox="0 0 16 16">
+            <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"></path>
+            </svg>
+          </td>
+          <td><small data-reporter-target="greendata2"></small>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-2-circle" viewBox="0 0 16 16">
+            <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM6.646 6.24v.07H5.375v-.064c0-1.213.879-2.402 2.637-2.402 1.582 0 2.613.949 2.613 2.215 0 1.002-.6 1.667-1.287 2.43l-.096.107-1.974 2.22v.077h3.498V12H5.422v-.832l2.97-3.293c.434-.475.903-1.008.903-1.705 0-.744-.557-1.236-1.313-1.236-.843 0-1.336.615-1.336 1.306Z"></path>
+            </svg>
+          </td>
+          <td data-reporter-target="greeninregulation"></td>
+        </tr>
+
+      </table>
+      <div class="container text-center">
+        <div class="row row-cols-auto">
+          <div class="col">
+            <span><small>OB/Penalty</small></span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+            </svg>
+          </div>
+          <div class="col">
+            <span><small>Circle</small></span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-1-circle" viewBox="0 0 16 16">
+            <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"></path>
+            </svg>
+          </div>
+          <div class="col">
+            <span><small>Circle</small></span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-2-circle" viewBox="0 0 16 16">
+            <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM6.646 6.24v.07H5.375v-.064c0-1.213.879-2.402 2.637-2.402 1.582 0 2.613.949 2.613 2.215 0 1.002-.6 1.667-1.287 2.43l-.096.107-1.974 2.22v.077h3.498V12H5.422v-.832l2.97-3.293c.434-.475.903-1.008.903-1.705 0-.744-.557-1.236-1.313-1.236-.843 0-1.336.615-1.336 1.306Z"></path>
+            </svg>
+          </div>
+          <div class="col">
+            <span><small>Scramble</small></span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-yin-yang" viewBox="0 0 16 16">
+            <path d="M9.167 4.5a1.167 1.167 0 1 1-2.334 0 1.167 1.167 0 0 1 2.334 0Z"></path>
+            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM1 8a7 7 0 0 1 7-7 3.5 3.5 0 1 1 0 7 3.5 3.5 0 1 0 0 7 7 7 0 0 1-7-7Zm7 4.667a1.167 1.167 0 1 1 0-2.334 1.167 1.167 0 0 1 0 2.334Z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <% @card.shots %>
+      <br>
+      <div class="row">
+        <div class="d-grid gap-2">
+          <%= link_to "Card list", cards_path, class:"btn btn-outline-dark mb-3" %>
+        </div>
+        <div class="col align-self-end">
+          <%= button_to "Delete", @card, method: :delete, class:"btn btn-outline-danger" %>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>

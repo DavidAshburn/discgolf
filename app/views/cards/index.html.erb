@@ -1,14 +1,12 @@
-<p style="color: green"><%= notice %></p>
-
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
 <h1>Cards</h1>
 
 <div id="cards">
   <% @cards.each do |card| %>
-    <%= render card %>
-    <p>
-      <%= link_to "Show this card", card %>
-    </p>
+    <% if card.user_id == current_user.id %>
+      <%= render card %>
+    <% end %>
   <% end %>
 </div>
-
-<%= link_to "New card", new_card_path %>

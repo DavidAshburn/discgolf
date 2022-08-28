@@ -1,3 +1,6 @@
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
 <h1>Editing card</h1>
 
 <%= render "form", card: @card %>

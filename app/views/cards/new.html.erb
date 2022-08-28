@@ -1,9 +1,171 @@
-<h1>New card</h1>
+<div class="card text-center"  data-controller="grandmother"   data-grandmother-albatross-class="bg-dark bg-gradient text-white" data-grandmother-eagle-class="bg-info bg-gradient" data-grandmother-birdie-class="bg-primary bg-gradient" data-grandmother-par-class="bg-success bg-gradient" data-grandmother-bogey-class="bg-secondary bg-gradient" data-grandmother-double-class="bg-warning bg-gradient" data-grandmother-triple-class="bg-danger bg-gradient">
+  <div style="display:none;"> 
+    <p data-grandmother-target="par"><%= @par_list[0] %></p>
+    <p data-grandmother-target="par"><%= @par_list[1] %></p>
+    <p data-grandmother-target="par"><%= @par_list[2] %></p>
+    <p data-grandmother-target="par"><%= @par_list[3] %></p>
+    <p data-grandmother-target="par"><%= @par_list[4] %></p>
+    <p data-grandmother-target="par"><%= @par_list[5] %></p>
+    <p data-grandmother-target="par"><%= @par_list[6] %></p>
+    <p data-grandmother-target="par"><%= @par_list[7] %></p>
+    <p data-grandmother-target="par"><%= @par_list[8] %></p>
+  </div>
 
-<%= render "form", card: @card %>
+  <div class="card-header">
+    <%= "#{Course.find_by(id: @variant.course_id).name}" %>
+  </div>
+  <div class="card-body">
+    <div class="row mb-2">
+      <h5 class="card-title"> <%= "#{@variant.name}" %></h5>
+    </div>
+    <div class="row mb-2">
+      <div class="col-4">
+        <p data-grandmother-target="parlabel"><span data-grandmother-target="thispar"></span></p>
+      </div>
+      <div class="col-4">
+        <p data-grandmother-target="holelabel"><span data-grandmother-target="thishole"></span></p>
+      </div>
+      <div class="col-4">
+        <p data-grandmother-target="scorelabel"><span data-grandmother-target="thisscore"></span></p>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="btn-group" role="group" aria-label="Throws">
+        <%# <button type="button" class="btn btn-primary bg-gradient" data-action="grandmother#shotInc">Throw</button> %>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          Throw
+        </button>
+        <button type="button" class="btn btn-secondary bg-gradient" data-action="grandmother#shotUndo">Undo</button>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="btn-group" role="group" aria-label="Holes">
+        <button type="button" class="btn btn-secondary bg-gradient" data-action="grandmother#holePrevious">Back</button>
+      </div>
+    </div>
+    <br>
+    <table class="table table-success">
+      <thead>
+        <tr>
+          <th scope="col" class="border border-light border-4">1</th>
+          <th scope="col" class="border border-light border-4">2</th>
+          <th scope="col" class="border border-light border-4">3</th>
+          <th scope="col" class="border border-light border-4">4</th>
+          <th scope="col" class="border border-light border-4">5</th>
+          <th scope="col" class="border border-light border-4">6</th>
+          <th scope="col" class="border border-light border-4">7</th>
+          <th scope="col" class="border border-light border-4">8</th>
+          <th scope="col" class="border border-light border-4">9</th>
+          <th scope="col" class="border border-light border-4">T</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-primary">
+          <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+          <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+          <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+          <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+          <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+          <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+          <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+          <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+          <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+          <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="totalpar"></em></th>
+        </tr>
+        <tr>
+          <td class="border border-light border-4" data-grandmother-target="score"></td>
+          <td class="border border-light border-4" data-grandmother-target="score"></td>
+          <td class="border border-light border-4" data-grandmother-target="score"></td>
+          <td class="border border-light border-4" data-grandmother-target="score"></td>
+          <td class="border border-light border-4" data-grandmother-target="score"></td>
+          <td class="border border-light border-4" data-grandmother-target="score"></td>
+          <td class="border border-light border-4" data-grandmother-target="score"></td>
+          <td class="border border-light border-4" data-grandmother-target="score"></td>
+          <td class="border border-light border-4" data-grandmother-target="score"></td>
+          <td class="border border-light border-4" data-grandmother-target="total"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <%= form_with model: @card do |form| %>
+    <% if @card.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
 
-<br>
+        <ul>
+          <% @card.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<div>
-  <%= link_to "Back to cards", cards_path %>
+    <div>
+      <%= form.text_area :score, data: {target: "grandmother.scoreout" }, class: "visually-hidden" %>
+    </div>
+
+    <div>
+      <%= form.text_area :shots, data: {target: "grandmother.shotsout" }, class: "visually-hidden" %>
+    </div>
+
+    <div>
+      <%= form.hidden_field :user_id, id: :card_user_id, value:current_user.id %>
+    </div>
+
+    <div>
+      <%= form.hidden_field :variant_id, id: :card_variant_id, value:@variant.id %>
+    </div>
+
+    <div>
+      <%= form.hidden_field :course_id, id: :card_course_id, value:Course.find_by(id: @variant.course_id).id %>
+    </div>
+
+    <div>
+      <%= form.submit 'Submit Card', class: "btn btn-success" %>
+    </div>
+    <br>
+      <%= link_to "Cancel Round", home_profile_path, class: "btn btn-danger" %> <!-- I want a turbo confirm here -->
+  <% end %>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Choose Your Lie</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-5">
+            <div class="btn-group" role="group" aria-label="Throws">
+              <button type="button" class="btn btn-success" data-action="grandmother#writeBasket" data-bs-dismiss="modal">
+                Basket
+              </button>
+              <button type="button" class="btn btn-outline-success" data-action="grandmother#writeCircleOne" data-bs-dismiss="modal">
+                Circle 1
+              </button>
+              <button type="button" class="btn btn-success" data-action="grandmother#writeCircleTwo" data-bs-dismiss="modal">
+                Circle 2
+              </button>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="btn-group" role="group" aria-label="Throws">
+              <button type="button" class="btn btn-primary" data-action="grandmother#writeFairway" data-bs-dismiss="modal">
+                Fairway
+              </button>
+              <button type="button" class="btn btn-outline-primary" data-action="grandmother#writeOffFairway" data-bs-dismiss="modal">
+                Off Fairway
+              </button>
+              <button type="button" class="btn btn-warning" data-action="grandmother#writePenalty" data-bs-dismiss="modal">
+                Penalty
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+

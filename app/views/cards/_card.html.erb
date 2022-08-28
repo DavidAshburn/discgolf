@@ -1,27 +1,15 @@
 <div id="<%= dom_id card %>">
-  <p>
-    <strong>Score:</strong>
-    <%= card.score %>
-  </p>
+  
+  <% thiscourse = Course.find_by(id: card.course_id) %>
+  <% thisvariant = Variant.find_by(id: card.variant_id) %>
 
-  <p>
-    <strong>User:</strong>
-    <%= card.user_id %>
-  </p>
-
-  <p>
-    <strong>Variant:</strong>
-    <%= card.variant_id %>
-  </p>
-
-  <p>
-    <strong>Course:</strong>
-    <%= card.course_id %>
-  </p>
-
-  <p>
-    <strong>Shots:</strong>
-    <%= card.shots %>
-  </p>
-
+  <div class="card w-80">
+    <h1 class="card-header text-center"><%= link_to "#{thiscourse.name}", card %></h1>
+    <div class="card-body">
+      <h5 class="card-title text-center text-muted"><%= thisvariant.name %></h5>
+      <h6 class="card-title text-center text-muted"><%= card.created_at.to_fs(:long)[0..-6] %></h6>
+    </div>
+  </div>
 </div>
+
+  
