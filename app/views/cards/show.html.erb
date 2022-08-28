@@ -17,43 +17,47 @@
       <table class="table table-success text-center">
         <thead>
           <tr>
-            <th scope="col" class="border border-light border-4">1</th>
-            <th scope="col" class="border border-light border-4">2</th>
-            <th scope="col" class="border border-light border-4">3</th>
-            <th scope="col" class="border border-light border-4">4</th>
-            <th scope="col" class="border border-light border-4">5</th>
-            <th scope="col" class="border border-light border-4">6</th>
-            <th scope="col" class="border border-light border-4">7</th>
-            <th scope="col" class="border border-light border-4">8</th>
-            <th scope="col" class="border border-light border-4">9</th>
-            <th scope="col" class="border border-light border-4">T</th>
+            <% (1..9).each do |x| %>
+              <th scope="col" class="border border-light border-4"><%= x %></th>
+            <% end %>
           </tr>
         </thead>
         <tbody>
-          <tr class="table-primary"> <!-- taking data from the cards_controller into reporter_controller.js here -->
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.one %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.two %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.three %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.four %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.five %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.six %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.seven %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.eight %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.nine %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted"><em data-reporter-target="totalpar"></em></th>
+          <tr class="table-primary">
+            <% (0..9.each do |x| %>
+              <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= @parlist[x] %></em></th>
+            <% end %>
           </tr>
-          <tr>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="total"></td>
+          <tr class="table-secondary">
+            <% (0..9.each do |x| %>
+              <td class="border border-light border-4" data-reporter-target="score"></td>
+            <% end %>
           </tr>
+          <% if @variant.length == '18' %>
+            </tbody>
+            <thead>
+              <tr>
+                <% (10..18).each do |x| %>
+                  <th scope="col" class="border border-light border-4"><%= x %></th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-primary">
+                <% (0..9.each do |x| %>
+                  <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= @parlist[x] %></em></th>
+                <% end %>
+              </tr>
+              <tr class="table-secondary">
+                <% (0..9.each do |x| %>
+                  <td class="border border-light border-4" data-reporter-target="score"></td>
+                <% end %>
+              </tr>
+            </tbody>
+          <% end %>
+          <tr class="table-success">
+            <td class="border border-dark border-4" data-reporter-target="total"></td>
+            <td class="border border-dark border-4" data-reporter-target="totalpar"></td>
         </tbody>
       </table>
       <table class="table">
