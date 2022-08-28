@@ -1,10 +1,92 @@
-<h1>Editing variant</h1>
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
+<div class="p-3 mb-2 bg-success bg-gradient text-white fs-4" style="border-radius:15px">Edit Variant</div>
+<%= form_with(model: @variant) do |form| %>
+  <% if @variant.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@variant.errors.count, "error") %> prohibited this variant from being saved:</h2>
 
-<%= render "form", variant: @variant %>
+      <ul>
+        <% @variant.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= form.text_field :name, class:"form-control", value: @variant.name %>
+
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Par</th>
+    </tr>
+  </thead>
+  <tbody class="text-center align-middle">
+    <tr>
+      <td><b>1</b></td>
+      <td>
+        <%= form.text_field :one, class:"form-control", value:@variant.one %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>2</b></td>
+      <td>      
+        <%= form.text_field :two, class:"form-control", value:@variant.two %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>3</b></td>
+      <td>
+        <%= form.text_field :three, class:"form-control", value:@variant.three  %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>4</b></td>
+      <td>
+        <%= form.text_field :four, class:"form-control", value:@variant.four  %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>5</b></td>
+      <td>
+        <%= form.text_field :five, class:"form-control", value:@variant.five  %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>6</b></td>
+      <td>
+        <%= form.text_field :six, class:"form-control", value:@variant.six  %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>7</b></td>
+      <td>
+        <%= form.text_field :seven, class:"form-control", value:@variant.seven  %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>8</b></td>
+      <td>
+        <%= form.text_field :eight, class:"form-control", value:@variant.eight  %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>9</b></td>
+      <td>
+        <%= form.text_field :nine, class:"form-control", value:@variant.nine  %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<%= form.submit class:"btn btn-success" %>
+
+<% end %>
+
 
 <br>
 
-<div>
-  <%= link_to "Show this variant", @variant %> |
-  <%= link_to "Back to variants", variants_path %>
-</div>
+<%= link_to "Back to Course", @course, class:"btn btn-outline-dark" %>

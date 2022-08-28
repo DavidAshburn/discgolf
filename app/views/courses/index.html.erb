@@ -1,14 +1,14 @@
-<p style="color: green"><%= notice %></p>
-
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
 <h1>Courses</h1>
 
 <div id="courses">
   <% @courses.each do |course| %>
-    <%= render course %>
-    <p>
-      <%= link_to "Show this course", course %>
-    </p>
+    <% if course.user_id == current_user.id %>
+      <%= render course %>
+    <% end %>
   <% end %>
+  <br>
+  <%= link_to "New course", new_course_path, class:"btn btn-success" %>
 </div>
-
-<%= link_to "New course", new_course_path %>

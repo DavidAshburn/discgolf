@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
-
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
 <%= render @variant %>
 
 <div>
-  <%= link_to "Edit this variant", edit_variant_path(@variant) %> |
-  <%= link_to "Back to variants", variants_path %>
+  <%= link_to "Edit this layout", edit_variant_path(@variant) %> |
+  <%= link_to "Back to Courses", courses_path %>
 
-  <%= button_to "Destroy this variant", @variant, method: :delete %>
+  <%= button_to "Destroy this layout", @variant, method: :delete %>
 </div>

@@ -10,23 +10,80 @@
       </ul>
     </div>
   <% end %>
+  <% if @variant.name == nil %>
+    <% @variant.name = "Enter Name" %>
+  <% end %>
+  <%# @variant.name %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+  <%= form.text_field :name, class:"form-control", placeholder: @variant.name %>
+  <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Par</th>
+    </tr>
+  </thead>
+  <tbody class="text-center align-middle">
+    <tr>
+      <td><b>1</b></td>
+      <td>
+        <%= form.text_field :one, class:"form-control", value:"3" %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>2</b></td>
+      <td>      
+        <%= form.text_field :two, class:"form-control", value:"3" %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>3</b></td>
+      <td>
+        <%= form.text_field :three, class:"form-control", value:"3"  %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>4</b></td>
+      <td>
+        <%= form.text_field :four, class:"form-control", value:"3"  %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>5</b></td>
+      <td>
+        <%= form.text_field :five, class:"form-control", value:"3"  %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>6</b></td>
+      <td>
+        <%= form.text_field :six, class:"form-control", value:"3"  %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>7</b></td>
+      <td>
+        <%= form.text_field :seven, class:"form-control", value:"3"  %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>8</b></td>
+      <td>
+        <%= form.text_field :eight, class:"form-control", value:"3"  %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>9</b></td>
+      <td>
+        <%= form.text_field :nine, class:"form-control", value:"3"  %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="row, pt-1">
+  <%= form.number_field :course_id, id: :variant_course_id, class:"form-control", value:course_id, type: :hidden %>
+</div>
+<%= form.submit "Save Layout", class:"btn btn-success" %>
 
-  <div>
-    <%= form.label :length, style: "display: block" %>
-    <%= form.number_field :length %>
-  </div>
-
-  <div>
-    <%= form.label :course_id, style: "display: block" %>
-    <%= form.number_field :course_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>
+

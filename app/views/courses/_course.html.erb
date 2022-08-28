@@ -1,22 +1,15 @@
+
 <div id="<%= dom_id course %>">
-  <p>
-    <strong>Name:</strong>
-    <%= course.name %>
-  </p>
 
-  <p>
-    <strong>City:</strong>
-    <%= course.city %>
-  </p>
-
-  <p>
-    <strong>State:</strong>
-    <%= course.state %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= course.user_id %>
-  </p>
-
+  <div class="card w-80">
+    <h1 class="card-header text-center"><%= link_to "#{course.name}", course %></h1>
+    <div class="card-body">
+      <h5 class="card-title text-center text-muted"> <%= "#{course.city}, #{course.state}"%>
+      <% course.variants.each do |variant| %>
+        <h6 class="card-title text-center text-muted"><%= variant.name %></h5>
+      <% end %>
+    </div>
+  </div>
 </div>
+
+  

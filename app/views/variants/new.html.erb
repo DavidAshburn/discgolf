@@ -1,9 +1,12 @@
-<h1>New variant</h1>
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
+<div class="p-3 mb-2 bg-success bg-gradient text-white fs-4" style="border-radius:15px">New Layout</div>
 
-<%= render "form", variant: @variant %>
+<%= render "form", variant: @variant, course_id: @course_id %>
 
 <br>
 
 <div>
-  <%= link_to "Back to variants", variants_path %>
+  <%= link_to "Back to Courses", courses_path %>
 </div>

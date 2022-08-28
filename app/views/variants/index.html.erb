@@ -1,14 +1,40 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Variants</h1>
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
+<h1>Layouts</h1>
 
 <div id="variants">
-  <% @variants.each do |variant| %>
-    <%= render variant %>
-    <p>
-      <%= link_to "Show this variant", variant %>
-    </p>
-  <% end %>
-</div>
+     <table class="table table-striped table-hover w-auto">
+       <thead scope;="row" style="background-color: #11d47c;">
+         <tr>
+          <th scope="col" class="text-white">Variant</th>
+          <th scope="col" class="text-white">1</th>
+          <th scope="col" class="text-white">2</th>
+          <th scope="col" class="text-white">3</th>
+          <th scope="col" class="text-white">4</th>
+          <th scope="col" class="text-white">5</th>
+          <th scope="col" class="text-white">6</th>
+          <th scope="col" class="text-white">7</th>
+          <th scope="col" class="text-white">8</th>
+          <th scope="col" class="text-white">9</th>           
+        </tr>
+       </thead>
+      <tbody>
 
-<%= link_to "New variant", new_variant_path %>
+        <% @variants.each do |variant| %>
+          <tr>
+            <td><%= link_to variant.name, variant, class:"btn btn-success" %></td>
+            <td><%= variant.one %></td>
+            <td><%= variant.two %></td>
+            <td><%= variant.three %></td>
+            <td><%= variant.four %></td>
+            <td><%= variant.five %></td>
+            <td><%= variant.six %></td>
+            <td><%= variant.seven %></td>
+            <td><%= variant.eight %></td>
+            <td><%= variant.nine %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
