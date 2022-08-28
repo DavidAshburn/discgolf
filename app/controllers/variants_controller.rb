@@ -65,6 +65,6 @@ class VariantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def variant_params
-      params.require(:variant).permit(:name, :length, :course_id)
+      params.require(:variant).permit(:name, :length, :course_id, :pars)
     end
 end

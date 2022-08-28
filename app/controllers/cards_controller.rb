@@ -13,6 +13,8 @@ class CardsController < ApplicationController
   # GET /cards/new
   def new
     @card = Card.new
+    @variant = Variant.find_by(id: params[:variant_id])
+    @par_list = @variant.pars.split('')
   end
 
   # GET /cards/1/edit
