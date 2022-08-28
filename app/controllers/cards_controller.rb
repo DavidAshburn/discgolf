@@ -14,7 +14,7 @@ class CardsController < ApplicationController
   def new
     @card = Card.new
     @variant = Variant.find_by(id: params[:variant_id])
-    @par_list = @variant.pars.split('')
+    @length = params[:length]
   end
 
   # GET /cards/1/edit
@@ -67,6 +67,6 @@ class CardsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def card_params
-      params.require(:card).permit(:score, :user_id, :variant_id, :course_id, :shots)
+      params.require(:card).permit(:score, :user_id, :variant_id, :course_id, :shots, :length)
     end
 end

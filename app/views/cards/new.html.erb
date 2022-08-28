@@ -1,14 +1,7 @@
 <div class="card text-center"  data-controller="grandmother" data-grandmother-albatross-class="bg-dark bg-gradient text-white" data-grandmother-eagle-class="bg-info bg-gradient" data-grandmother-birdie-class="bg-primary bg-gradient" data-grandmother-par-class="bg-success bg-gradient" data-grandmother-bogey-class="bg-secondary bg-gradient" data-grandmother-double-class="bg-warning bg-gradient" data-grandmother-triple-class="bg-danger bg-gradient">
   <div style="display:none;"> 
-    <p data-grandmother-target="par"><%= @par_list[0] %></p>
-    <p data-grandmother-target="par"><%= @par_list[1] %></p>
-    <p data-grandmother-target="par"><%= @par_list[2] %></p>
-    <p data-grandmother-target="par"><%= @par_list[3] %></p>
-    <p data-grandmother-target="par"><%= @par_list[4] %></p>
-    <p data-grandmother-target="par"><%= @par_list[5] %></p>
-    <p data-grandmother-target="par"><%= @par_list[6] %></p>
-    <p data-grandmother-target="par"><%= @par_list[7] %></p>
-    <p data-grandmother-target="par"><%= @par_list[8] %></p>
+    <p data-grandmother-target="par"><%= @variant.pars %></p>
+    <p data-grandmother-target="length"><%= @variant.length %></p>
   </div>
 
   <div class="card-header">
@@ -70,7 +63,7 @@
           <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
           <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
           <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
-          <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="totalpar"></em></th>
+          <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="firstpar"></em></th>
         </tr>
         <tr>
           <td class="border border-light border-4" data-grandmother-target="score"></td>
@@ -82,10 +75,54 @@
           <td class="border border-light border-4" data-grandmother-target="score"></td>
           <td class="border border-light border-4" data-grandmother-target="score"></td>
           <td class="border border-light border-4" data-grandmother-target="score"></td>
-          <td class="border border-light border-4" data-grandmother-target="total"></td>
+          <td class="border border-light border-4" data-grandmother-target="firsttotal"></td>
         </tr>
       </tbody>
     </table>
+    <% if @length == '18' %>
+      <table class="table table-success">
+        <thead>
+          <tr>
+            <th scope="col" class="border border-light border-4">10</th>
+            <th scope="col" class="border border-light border-4">11</th>
+            <th scope="col" class="border border-light border-4">12</th>
+            <th scope="col" class="border border-light border-4">13</th>
+            <th scope="col" class="border border-light border-4">14</th>
+            <th scope="col" class="border border-light border-4">15</th>
+            <th scope="col" class="border border-light border-4">16</th>
+            <th scope="col" class="border border-light border-4">17</th>
+            <th scope="col" class="border border-light border-4">18</th>
+            <th scope="col" class="border border-light border-4">T</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-primary">
+            <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+            <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+            <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+            <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+            <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+            <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+            <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+            <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+            <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="pardisplay"></em></th>
+            <th scope="col" class="border border-light border-4 text-muted"><em data-grandmother-target="secondpar"></em></th>
+          </tr>
+          <tr>
+            <td class="border border-light border-4" data-grandmother-target="score"></td>
+            <td class="border border-light border-4" data-grandmother-target="score"></td>
+            <td class="border border-light border-4" data-grandmother-target="score"></td>
+            <td class="border border-light border-4" data-grandmother-target="score"></td>
+            <td class="border border-light border-4" data-grandmother-target="score"></td>
+            <td class="border border-light border-4" data-grandmother-target="score"></td>
+            <td class="border border-light border-4" data-grandmother-target="score"></td>
+            <td class="border border-light border-4" data-grandmother-target="score"></td>
+            <td class="border border-light border-4" data-grandmother-target="score"></td>
+            <td class="border border-light border-4" data-grandmother-target="secondtotal"></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
   </div>
   <%= form_with model: @card do |form| %>
     <% if @card.errors.any? %>

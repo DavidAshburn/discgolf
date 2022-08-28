@@ -14,7 +14,7 @@
               <%= link_to variant.name, edit_variant_path(variant.id, :course_id => @course.id), class:"btn btn-success text-nowrap" %>
           </div>
           <div class="col-5">
-              <%# link_to "Play a Round", new_card_path( variant_id: variant.id ), class:"btn btn-warning" %>
+              <%= link_to "Play a Round", new_card_path( variant_id: variant.id, length: variant.length ), class:"btn btn-warning" %>
           </div>
         </div>
         <% if variant.pars %>
