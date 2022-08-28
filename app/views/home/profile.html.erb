@@ -1,2 +1,55 @@
-<h1>Profile</h1>
-<p> I'll fill this in after the models are put in </p>
+<% if user_signed_in? %>
+  <%= render 'layouts/nav' %>
+<% end %>
+<div class="px-4 py-5 my-0 text-center">
+    <div class="row">
+      <h1 class="display-6 fw-bold mt-3 col-sm-4 text-center"><%= current_user.email %></h1>
+    </div>
+    <br>
+    <% if @courses != nil %>
+      <div class="p-3 mb-2 bg-success bg-gradient text-white fs-4" style="border-radius:15px">My Courses</div>
+      <table class="table my-2">
+        <thead>
+          <th scope="col">Name</th>
+          <th scope="col">City</th>
+          <th scope="col">State</th>
+        </thead>
+        <tbody>
+          <% @courses.each do |course| %>
+          <tr>
+            <td><%= link_to course.name, course, class:"link-secondary" %></td>
+            <td><%= course.city %></td>
+            <td><%= course.state %></td>
+          </tr>
+        <% end %>          
+        </tbody>
+      </table>
+    <% end %>
+    <div class="p-3 mb-2 bg-success bg-gradient text-white fs-4" style="border-radius:15px">Recent Cards</div>
+    <table class="table">
+      <thead>
+        <th scope="col">Course</th>
+        <th scope="col">Layout</th>
+        <th scope="col">Par</th>
+        <th scope="col">Score</th>
+      </thead>
+      <tbody>
+        <% if @cards != 0 %>
+          <% @cards.each do |card|%>
+          <% course = Course.find_by(id: card.course_id) %>
+          <% variant = Variant.find_by(id: card.variant_id) %>
+          <% par = variant.one.to_i + variant.two.to_i + variant.three.to_i + variant.four.to_i + variant.five.to_i + variant.six.to_i + variant.seven.to_i + variant.eight.to_i + variant.nine.to_i %>
+          <tr class="align-middle">
+            <td><%= link_to card.course.name, course, class: "btn btn-primary btn-sm" %></td>
+            <td><%= link_to variant.name, new_card_path( variant_id: variant.id ), class:"btn btn-outline-success btn-sm" %></td>
+            <td><%= par %></td>
+            <td><%= link_to card.score, card, class: "btn btn-success" %></td>
+          </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <p class="nav-item">
+      <%= link_to "Edit Profile", edit_user_registration_path, class:"btn btn-outline-dark mt-4" %>
+    </p>
+</div>
