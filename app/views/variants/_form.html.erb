@@ -1,89 +1,83 @@
-<%= form_with(model: variant) do |form| %>
-  <% if variant.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(variant.errors.count, "error") %> prohibited this variant from being saved:</h2>
+<div data-controller="variants">
+  <%= form_with(model: variant) do |form| %>
+    <% if variant.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(variant.errors.count, "error") %> prohibited this variant from being saved:</h2>
 
-      <ul>
-        <% variant.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% variant.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <% if @variant.name == nil %>
+      <% @variant.name = "Enter Name" %>
+    <% end %>
+
+    <div class="row">
+      <div class = "col-9">
+        <%= form.text_field :name, class:"form-control", placeholder: "Layout Name" %>
+      </div>
     </div>
-  <% end %>
-  <% if @variant.name == nil %>
-    <% @variant.name = "Enter Name" %>
-  <% end %>
-  <%# @variant.name %>
 
-  <%= form.text_field :name, class:"form-control", placeholder: @variant.name %>
-  <table class="table table-sm">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Par</th>
-    </tr>
-  </thead>
-  <tbody class="text-center align-middle">
-    <tr>
-      <td><b>1</b></td>
-      <td>
-        <%= form.text_field :one, class:"form-control", value:"3" %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>2</b></td>
-      <td>      
-        <%= form.text_field :two, class:"form-control", value:"3" %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>3</b></td>
-      <td>
-        <%= form.text_field :three, class:"form-control", value:"3"  %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>4</b></td>
-      <td>
-        <%= form.text_field :four, class:"form-control", value:"3"  %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>5</b></td>
-      <td>
-        <%= form.text_field :five, class:"form-control", value:"3"  %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>6</b></td>
-      <td>
-        <%= form.text_field :six, class:"form-control", value:"3"  %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>7</b></td>
-      <td>
-        <%= form.text_field :seven, class:"form-control", value:"3"  %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>8</b></td>
-      <td>
-        <%= form.text_field :eight, class:"form-control", value:"3"  %>
-      </td>
-    </tr>
-    <tr>
-      <td><b>9</b></td>
-      <td>
-        <%= form.text_field :nine, class:"form-control", value:"3"  %>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<div class="row, pt-1">
-  <%= form.number_field :course_id, id: :variant_course_id, class:"form-control", value:course_id, type: :hidden %>
+    
+
+    <% parray = [] %>
+    <% (0..8).each do |x| %>
+      <% parray.push(3) %>
+    <% end %>
+
+    <% if @length == '18' %>
+      <% (9..17).each do |x| %>
+        <% parray.push(3) %>
+      <% end %>
+    <% end %>
+
+    <table class="table table-sm">
+      <thead>
+        <tr class="row">
+          <th class="col-2 text-center">#</th>
+          <th class="col-2 text-center">Par</th>
+        </tr>
+      </thead>
+      <tbody class="text-center align-middle">
+        <% (0..8).each do |x| %>
+          <tr class="row">
+            <td class="col-2"><b><%= x + 1 %></b></td>
+            <td class="col-2">
+              <select class="form-select", value="3", data-variants-target="parsin", data-action="variants#parupdate">
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </td>
+          </tr>
+        <% end %>
+        <% if @length == '18' %>
+          <% (9..17).each do |x| %>
+            <tr class="row">
+              <td class="col-2"><b><%= x + 1 %></b></td>
+              <td class="col-2">
+                <select class="form-select", value="3", data-variants-target="parsin", data-action="variants#parupdate">
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+
+  <div class="row, pt-1">
+    <%= form.number_field :course_id, id: :variant_course_id, value: course_id, class: "visually-hidden" %>
+    <%= form.number_field :length, value: @length, class: "visually-hidden" %>
+    
+    <%= form.text_field :pars, data: { target: "variants.parsout" } %>
+  </div>
+  <%= form.submit "Save Layout", class:"btn btn-success" %>
+
+  <% end %>
 </div>
-<%= form.submit "Save Layout", class:"btn btn-success" %>
-
-<% end %>
-

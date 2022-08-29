@@ -10,15 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_16_154110) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_28_224051) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "cards", force: :cascade do |t|
     t.integer "score"
     t.integer "user_id"
     t.integer "variant_id"
+    t.integer "course_id"
+    t.string "shots"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "shots"
-    t.integer "course_id"
+    t.string "length"
+    t.index ["course_id"], name: "index_cards_on_course_id"
     t.index ["user_id"], name: "index_cards_on_user_id"
     t.index ["variant_id"], name: "index_cards_on_variant_id"
   end
@@ -27,9 +32,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_16_154110) do
     t.string "name"
     t.string "city"
     t.string "state"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
@@ -47,18 +52,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_16_154110) do
 
   create_table "variants", force: :cascade do |t|
     t.string "name"
-    t.string "one"
-    t.string "two"
-    t.string "three"
-    t.string "four"
-    t.string "five"
-    t.string "six"
-    t.string "seven"
-    t.string "eight"
-    t.string "nine"
+    t.integer "length"
     t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "pars"
     t.index ["course_id"], name: "index_variants_on_course_id"
   end
 

@@ -2,26 +2,10 @@
 
 one:
   name: MyString
-  one: MyString
-  two: MyString
-  three: MyString
-  four: MyString
-  five: MyString
-  six: MyString
-  seven: MyString
-  eight: MyString
-  nine: MyString
+  length: 1
   course_id: 1
 
 two:
   name: MyString
-  one: MyString
-  two: MyString
-  three: MyString
-  four: MyString
-  five: MyString
-  six: MyString
-  seven: MyString
-  eight: MyString
-  nine: MyString
+  length: 1
   course_id: 1

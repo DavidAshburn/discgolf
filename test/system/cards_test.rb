@@ -14,7 +14,9 @@ class CardsTest < ApplicationSystemTestCase
     visit cards_url
     click_on "New card"
 
+    fill_in "Course", with: @card.course_id
     fill_in "Score", with: @card.score
+    fill_in "Shots", with: @card.shots
     fill_in "User", with: @card.user_id
     fill_in "Variant", with: @card.variant_id
     click_on "Create Card"
@@ -27,7 +29,9 @@ class CardsTest < ApplicationSystemTestCase
     visit card_url(@card)
     click_on "Edit this card", match: :first
 
+    fill_in "Course", with: @card.course_id
     fill_in "Score", with: @card.score
+    fill_in "Shots", with: @card.shots
     fill_in "User", with: @card.user_id
     fill_in "Variant", with: @card.variant_id
     click_on "Update Card"

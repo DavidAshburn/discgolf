@@ -1,4 +1,4 @@
-  class CoursesController < ApplicationController
+class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
 
   # GET /courses or /courses.json
@@ -49,15 +49,10 @@
 
   # DELETE /courses/1 or /courses/1.json
   def destroy
-
-    @course.variants.each do |variant|
-      variant.destroy
-    end
-    
     @course.destroy
 
     respond_to do |format|
-      format.html { redirect_to courses_path, notice: "Course was successfully destroyed." }
+      format.html { redirect_to courses_url, notice: "Course was successfully destroyed." }
       format.json { head :no_content }
     end
   end

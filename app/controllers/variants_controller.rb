@@ -14,6 +14,7 @@ class VariantsController < ApplicationController
   def new
     @variant = Variant.new
     @course_id = params[:course_id]
+    @length = params[:length]
   end
 
   # GET /variants/1/edit
@@ -27,8 +28,7 @@ class VariantsController < ApplicationController
 
     respond_to do |format|
       if @variant.save
-        course = Course.find(@variant.course_id)
-        format.html { redirect_to course, notice: "Variant was successfully created." }
+        format.html { redirect_to variant_url(@variant), notice: "Variant was successfully created." }
         format.json { render :show, status: :created, location: @variant }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,8 +41,7 @@ class VariantsController < ApplicationController
   def update
     respond_to do |format|
       if @variant.update(variant_params)
-        course = Course.find_by(id: @variant.course_id)
-        format.html { redirect_to course, notice: "Variant was successfully updated." }
+        format.html { redirect_to variant_url(@variant), notice: "Variant was successfully updated." }
         format.json { render :show, status: :ok, location: @variant }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,9 +53,9 @@ class VariantsController < ApplicationController
   # DELETE /variants/1 or /variants/1.json
   def destroy
     @variant.destroy
-    course = Course.find(@variant.course_id)
+
     respond_to do |format|
-      format.html { redirect_to course, notice: "Variant was successfully destroyed." }
+      format.html { redirect_to courses_url, notice: "Variant was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -69,6 +68,6 @@ class VariantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def variant_params
-      params.require(:variant).permit(:name, :one, :two, :three, :four, :five, :six, :seven, :eight, :nine, :course_id)
+      params.require(:variant).permit(:name, :length, :course_id, :pars)
     end
 end

@@ -17,6 +17,7 @@ class CoursesTest < ApplicationSystemTestCase
     fill_in "City", with: @course.city
     fill_in "Name", with: @course.name
     fill_in "State", with: @course.state
+    fill_in "User", with: @course.user_id
     click_on "Create Course"
 
     assert_text "Course was successfully created"
@@ -30,6 +31,7 @@ class CoursesTest < ApplicationSystemTestCase
     fill_in "City", with: @course.city
     fill_in "Name", with: @course.name
     fill_in "State", with: @course.state
+    fill_in "User", with: @course.user_id
     click_on "Update Course"
 
     assert_text "Course was successfully updated"

@@ -4,8 +4,10 @@ one:
   name: MyString
   city: MyString
   state: MyString
+  user_id: 1
 
 two:
   name: MyString
   city: MyString
   state: MyString
+  user_id: 1

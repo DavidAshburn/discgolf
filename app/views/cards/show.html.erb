@@ -4,8 +4,11 @@
 <div data-controller="reporter"  data-reporter-albatross-class="bg-dark bg-gradient text-white" data-reporter-eagle-class="bg-info bg-gradient" data-reporter-birdie-class="bg-primary bg-gradient" data-reporter-par-class="bg-success bg-gradient" data-reporter-bogey-class="bg-secondary bg-gradient" data-reporter-double-class="bg-warning bg-gradient" data-reporter-triple-class="bg-danger bg-gradient">
   <% thiscourse = Course.find_by(id: @card.course_id) %>
   <% thisvariant = Variant.find_by(id: @card.variant_id) %>
+  <% parlist = thisvariant.pars.split('') %>
   <div style="display: none;">
     <p data-reporter-target="shotstring"> <%= @card.shots %> </p>
+    <p data-reporter-target="length"> <%= thisvariant.length %> </p>
+
   </div>
   <br><br>
   <div class="card w-80">
@@ -17,49 +20,62 @@
       <table class="table table-success text-center">
         <thead>
           <tr>
-            <th scope="col" class="border border-light border-4">1</th>
-            <th scope="col" class="border border-light border-4">2</th>
-            <th scope="col" class="border border-light border-4">3</th>
-            <th scope="col" class="border border-light border-4">4</th>
-            <th scope="col" class="border border-light border-4">5</th>
-            <th scope="col" class="border border-light border-4">6</th>
-            <th scope="col" class="border border-light border-4">7</th>
-            <th scope="col" class="border border-light border-4">8</th>
-            <th scope="col" class="border border-light border-4">9</th>
+            <% (1..9).each do |x| %>
+              <th scope="col" class="border border-light border-4 px-0"><%= x %></th>
+            <% end %>
             <th scope="col" class="border border-light border-4">T</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="table-primary"> <!-- taking data from the cards_controller into reporter_controller.js here -->
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.one %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.two %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.three %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.four %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.five %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.six %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.seven %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.eight %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= thisvariant.nine %></em></th>
-            <th scope="col" class="border border-light border-4 text-muted"><em data-reporter-target="totalpar"></em></th>
+          <tr class="table-primary">
+            <% psum = 0 %>
+            <% (0..8).each do |x| %>
+              <th scope="col" class="border border-light border-4 text-muted"><em data-reporter-target="holepar"><%= parlist[x] %></em></th>
+              <% psum += parlist[x].to_i %>
+            <% end %>
+            <th scope="col" class="border border-light border-4"><%= psum %></th>
           </tr>
-          <tr>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="score"></td>
-            <td class="border border-light border-4" data-reporter-target="total"></td>
+          <tr class="table-secondary">
+            <% (0..8).each do |x| %>
+              <td class="border border-light border-4" data-reporter-target="score"></td>
+            <% end %>
+            <td class="border border-light border-4" data-reporter-target="firsttotal"></td>
           </tr>
         </tbody>
       </table>
+
+      <% if thisvariant.length == 18 %>
+        <table class="table table-success text-center">
+          <thead>
+            <tr>
+              <% (10..18).each do |x| %>
+                <th scope="col" class="border border-light border-4 px-0"><%= x %></th>
+              <% end %>
+              <th scope="col" class="border border-light border-4">T</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-primary">
+              <% psum = 0 %>
+              <% (9..17).each do |x| %>
+                <th scope="col" class="border border-light border-4 text-muted" ><em data-reporter-target="holepar"><%= parlist[x] %></em></th>
+                <% psum += parlist[x].to_i %>
+              <% end %>
+              <th scope="col" class="border border-light border-4"><%= psum %></th>
+            </tr>
+            <tr class="table-secondary">
+              <% (0..8).each do |x| %>
+                <td class="border border-light border-4" data-reporter-target="score"></td>
+              <% end %>
+              <td class="border border-light border-4" data-reporter-target="secondtotal"></td>
+            </tr>
+          </tbody>
+        </table>
+          <% end %>
       <table class="table">
         
         <tr class="table-primary">
-          <th scope="row border border-light border-4">Tee Pad</th>
+          <th scope="row border border-light border-4">Drives</th>
           <td><small data-reporter-target="nodata"></small>
             <!-- space for icon -->
           </td>
@@ -163,7 +179,7 @@
           </div>
         </div>
       </div>
-      <%# @card.shots %>
+      <% @card.shots %>
       <br>
       <div class="row">
         <div class="d-grid gap-2">
