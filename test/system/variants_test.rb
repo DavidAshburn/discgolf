@@ -15,16 +15,8 @@ class VariantsTest < ApplicationSystemTestCase
     click_on "New variant"
 
     fill_in "Course", with: @variant.course_id
-    fill_in "Eight", with: @variant.eight
-    fill_in "Five", with: @variant.five
-    fill_in "Four", with: @variant.four
+    fill_in "Length", with: @variant.length
     fill_in "Name", with: @variant.name
-    fill_in "Nine", with: @variant.nine
-    fill_in "One", with: @variant.one
-    fill_in "Seven", with: @variant.seven
-    fill_in "Six", with: @variant.six
-    fill_in "Three", with: @variant.three
-    fill_in "Two", with: @variant.two
     click_on "Create Variant"
 
     assert_text "Variant was successfully created"
@@ -36,16 +28,8 @@ class VariantsTest < ApplicationSystemTestCase
     click_on "Edit this variant", match: :first
 
     fill_in "Course", with: @variant.course_id
-    fill_in "Eight", with: @variant.eight
-    fill_in "Five", with: @variant.five
-    fill_in "Four", with: @variant.four
+    fill_in "Length", with: @variant.length
     fill_in "Name", with: @variant.name
-    fill_in "Nine", with: @variant.nine
-    fill_in "One", with: @variant.one
-    fill_in "Seven", with: @variant.seven
-    fill_in "Six", with: @variant.six
-    fill_in "Three", with: @variant.three
-    fill_in "Two", with: @variant.two
     click_on "Update Variant"
 
     assert_text "Variant was successfully updated"

@@ -9,3 +9,6 @@ application.register("grandmother", GrandmotherController)
 
 import ReporterController from "./reporter_controller"
 application.register("reporter", ReporterController)
+
+import VariantsController from "./variants_controller"
+application.register("variants", VariantsController)

@@ -14,8 +14,7 @@ class CardsController < ApplicationController
   def new
     @card = Card.new
     @variant = Variant.find_by(id: params[:variant_id])
-    @par_list = []
-    @par_list.push(@variant.one,@variant.two,@variant.three,@variant.four,@variant.five,@variant.six,@variant.seven,@variant.eight,@variant.nine)
+    @length = params[:length]
   end
 
   # GET /cards/1/edit
@@ -25,9 +24,6 @@ class CardsController < ApplicationController
   # POST /cards or /cards.json
   def create
     @card = Card.new(card_params)
-    @variant = Variant.find_by(id: @card.variant_id)
-    @par_list = []
-    @par_list.push(@variant.one,@variant.two,@variant.three,@variant.four,@variant.five,@variant.six,@variant.seven,@variant.eight,@variant.nine)
 
     respond_to do |format|
       if @card.save
@@ -58,7 +54,7 @@ class CardsController < ApplicationController
     @card.destroy
 
     respond_to do |format|
-      format.html { redirect_to cards_path, notice: "Card was successfully destroyed." }
+      format.html { redirect_to cards_url, notice: "Card was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -71,6 +67,6 @@ class CardsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def card_params
-      params.require(:card).permit(:score, :shots, :user_id, :variant_id, :course_id)
+      params.require(:card).permit(:score, :user_id, :variant_id, :course_id, :shots, :length)
     end
 end

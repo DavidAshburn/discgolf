@@ -17,7 +17,7 @@ class VariantsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create variant" do
     assert_difference("Variant.count") do
-      post variants_url, params: { variant: { course_id: @variant.course_id, eight: @variant.eight, five: @variant.five, four: @variant.four, name: @variant.name, nine: @variant.nine, one: @variant.one, seven: @variant.seven, six: @variant.six, three: @variant.three, two: @variant.two } }
+      post variants_url, params: { variant: { course_id: @variant.course_id, length: @variant.length, name: @variant.name } }
     end
 
     assert_redirected_to variant_url(Variant.last)
@@ -34,7 +34,7 @@ class VariantsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update variant" do
-    patch variant_url(@variant), params: { variant: { course_id: @variant.course_id, eight: @variant.eight, five: @variant.five, four: @variant.four, name: @variant.name, nine: @variant.nine, one: @variant.one, seven: @variant.seven, six: @variant.six, three: @variant.three, two: @variant.two } }
+    patch variant_url(@variant), params: { variant: { course_id: @variant.course_id, length: @variant.length, name: @variant.name } }
     assert_redirected_to variant_url(@variant)
   end
 
