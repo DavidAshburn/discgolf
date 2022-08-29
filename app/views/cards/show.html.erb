@@ -4,8 +4,11 @@
 <div data-controller="reporter"  data-reporter-albatross-class="bg-dark bg-gradient text-white" data-reporter-eagle-class="bg-info bg-gradient" data-reporter-birdie-class="bg-primary bg-gradient" data-reporter-par-class="bg-success bg-gradient" data-reporter-bogey-class="bg-secondary bg-gradient" data-reporter-double-class="bg-warning bg-gradient" data-reporter-triple-class="bg-danger bg-gradient">
   <% thiscourse = Course.find_by(id: @card.course_id) %>
   <% thisvariant = Variant.find_by(id: @card.variant_id) %>
+  <% parlist = thisvariant.pars.split('') %>
   <div style="display: none;">
     <p data-reporter-target="shotstring"> <%= @card.shots %> </p>
+    <p data-reporter-target="length"> <%= thisvariant.length %> </p>
+
   </div>
   <br><br>
   <div class="card w-80">
@@ -18,48 +21,57 @@
         <thead>
           <tr>
             <% (1..9).each do |x| %>
-              <th scope="col" class="border border-light border-4"><%= x %></th>
+              <th scope="col" class="border border-light border-4 px-0"><%= x %></th>
             <% end %>
+            <th scope="col" class="border border-light border-4">T</th>
           </tr>
         </thead>
         <tbody>
           <tr class="table-primary">
-            <% (0..9.each do |x| %>
-              <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= @parlist[x] %></em></th>
+            <% psum = 0 %>
+            <% (0..8).each do |x| %>
+              <th scope="col" class="border border-light border-4 text-muted"><em data-reporter-target="holepar"><%= parlist[x] %></em></th>
+              <% psum += parlist[x].to_i %>
             <% end %>
+            <th scope="col" class="border border-light border-4"><%= psum %></th>
           </tr>
           <tr class="table-secondary">
-            <% (0..9.each do |x| %>
+            <% (0..8).each do |x| %>
               <td class="border border-light border-4" data-reporter-target="score"></td>
             <% end %>
+            <td class="border border-light border-4" data-reporter-target="firsttotal"></td>
           </tr>
-          <% if @variant.length == '18' %>
-            </tbody>
-            <thead>
-              <tr>
-                <% (10..18).each do |x| %>
-                  <th scope="col" class="border border-light border-4"><%= x %></th>
-                <% end %>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="table-primary">
-                <% (0..9.each do |x| %>
-                  <th scope="col" class="border border-light border-4 text-muted" data-reporter-target="holepar"><em><%= @parlist[x] %></em></th>
-                <% end %>
-              </tr>
-              <tr class="table-secondary">
-                <% (0..9.each do |x| %>
-                  <td class="border border-light border-4" data-reporter-target="score"></td>
-                <% end %>
-              </tr>
-            </tbody>
-          <% end %>
-          <tr class="table-success">
-            <td class="border border-dark border-4" data-reporter-target="total"></td>
-            <td class="border border-dark border-4" data-reporter-target="totalpar"></td>
         </tbody>
       </table>
+
+      <% if thisvariant.length == 18 %>
+        <table class="table table-success text-center">
+          <thead>
+            <tr>
+              <% (10..18).each do |x| %>
+                <th scope="col" class="border border-light border-4 px-0"><%= x %></th>
+              <% end %>
+              <th scope="col" class="border border-light border-4">T</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-primary">
+              <% psum = 0 %>
+              <% (9..17).each do |x| %>
+                <th scope="col" class="border border-light border-4 text-muted" ><em data-reporter-target="holepar"><%= parlist[x] %></em></th>
+                <% psum += parlist[x].to_i %>
+              <% end %>
+              <th scope="col" class="border border-light border-4"><%= psum %></th>
+            </tr>
+            <tr class="table-secondary">
+              <% (0..8).each do |x| %>
+                <td class="border border-light border-4" data-reporter-target="score"></td>
+              <% end %>
+              <td class="border border-light border-4" data-reporter-target="secondtotal"></td>
+            </tr>
+          </tbody>
+        </table>
+          <% end %>
       <table class="table">
         
         <tr class="table-primary">

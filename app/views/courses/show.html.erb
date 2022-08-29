@@ -9,25 +9,25 @@
     <table class="table table-sm">
       <tbody>
       <% @course.variants.each do |variant| %>
-        <div class="row">
+        <div class="row p-3 my-2 bg-dark bg-gradient text-white fs-4" style="border-radius:15px">
           <div class="col-5">
-              <%= link_to variant.name, edit_variant_path(variant.id, :course_id => @course.id), class:"btn btn-success text-nowrap" %>
+              <%= link_to variant.name, edit_variant_path(variant.id, :course_id => @course.id), class:"btn btn-success bg-gradient text-nowrap" %>
           </div>
           <div class="col-5">
-              <%= link_to "Play a Round", new_card_path( variant_id: variant.id, length: variant.length ), class:"btn btn-warning" %>
+              <%= link_to "Play a Round", new_card_path( variant_id: variant.id, length: variant.length ), class:"btn btn-warning bg-gradient text-nowrap" %>
           </div>
         </div>
         <% if variant.pars %>
           <% parset = variant.pars.split('') %>
-          <div class="row">
+          <div class="row p-1 bg-secondary bg-gradient text-white fs-4" style="border-radius:15px">
             <% (0..8).each do |i| %>
-              <div class="col"><%= parset[i] %></div>
+              <div class="col m-1 mx-4 bg-dark bg-gradient text-white text-center h2" style="border-radius:15px"><%= parset[i] %></div>
             <% end %>
           </div>
           <% if variant.length == 18 %>
-            <div class="row">
+            <div class="row p-1 bg-secondary bg-gradient text-white fs-4" style="border-radius:15px">
               <% (9..17).each do |i| %>
-                <div class="col"><%= parset[i] %></div>
+                <div class="col m-1 mx-4 bg-dark bg-gradient text-white text-center h2" style="border-radius:15px"><%= parset[i] %></div>
               <% end %>
             </div>
           <% end %>
@@ -43,10 +43,10 @@
 
     <div class="row">
       <div class="d-grid gap-2">
-        <%= link_to "Add a 9 Hole", new_variant_path(:course_id => @course.id, :length => '9'), class:"btn btn-outline-success mb-3" %>
-        <%= link_to "Add an 18 Hole", new_variant_path(:course_id => @course.id, :length => '18'), class:"btn btn-outline-success mb-3" %>
-        <%= link_to "Edit this course", edit_course_path, class:"btn btn-outline-warning mb-3" %>
-        <%= link_to "Course list", courses_path, class:"btn btn-outline-dark mb-3" %>
+        <%= link_to "Add a 9 Hole", new_variant_path(:course_id => @course.id, :length => '9'), class:"btn btn-primary bg-gradient mb-3" %>
+        <%= link_to "Add an 18 Hole", new_variant_path(:course_id => @course.id, :length => '18'), class:"btn btn-primary bg-gradient mb-3" %>
+        <%= link_to "Edit this course", edit_course_path, class:"btn btn-warning bg-gradient mb-3" %>
+        <%= link_to "Course list", courses_path, class:"btn btn-dark bg-gradient mb-3" %>
       </div>
       <div class="col align-self-end">
         <%= button_to "Delete", @course, method: :delete, class:"btn btn-outline-danger" %>

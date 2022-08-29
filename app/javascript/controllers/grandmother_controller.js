@@ -11,12 +11,11 @@ export default class extends Controller {
   "length", //layout length
   "score", //_updateScores scoreboard
   "total", //score total for player
-  "firsttotal",     //FIX
-  "secondtotal",    //FIX
+  "firsttotal",
+  "secondtotal",
   "pardisplay",  //scoreboard row
-  "totalpar",  //scoreboard row
-  "firstpar",       //FIX
-  "secondpar",      //FIX
+  "firstpar", 
+  "secondpar",
   "scoreout", //hidden form
   "shotsout" //hidden form
   ]
@@ -41,22 +40,32 @@ export default class extends Controller {
     this.totalpar = 0
     this.shotstring = ""
     this.length = 0
+
     this._updateScores()
   }
 
   connect() {
-    console.log("connect");
-    
+
     this.parlist = this.parTarget.innerText.split('')
     this.length = parseInt(this.lengthTarget.innerText)
 
     for(let i = 0; i < this.length; i++){
        this.pardisplayTargets[i].innerText = this.parlist[i]
+
+       if( this.length == 18 && i == 9 )
+        this.firstparTarget.innerText = this.totalpar
+
        this.totalpar += parseInt(this.parlist[i])
+
+       this.scorelist.push(0)
     }
 
     this.thispar = this.parlist[this.thishole-1]
-    this.totalparTarget.innerText = this.totalpar
+    
+    if( this.length == 9 )
+      this.firstparTarget.innerText = this.totalpar
+    else //we already set firstparTarget above
+      this.secondparTarget.innerText = this.totalpar - parseInt(this.firstparTarget.innerText)
 
     this._updateOutput()
 
@@ -97,16 +106,17 @@ export default class extends Controller {
         this.thishole++
 
         this._updateScores()
+        for(let i = 0; i < this.length; i++)
+          this.total += this.scorelist[i]
 
         this.thisscoreTarget.innerText = `Score: ${this.total}`
         this.thisparTarget.innerText = `Par: ${this.totalpar}`
         this.thisholeTarget.innerText = `${this.length} Holes`
 
         this.scoreoutTarget.innerHTML = this.total
-        //this.shotsoutTarget.innerText = this.shotstring
       }
       this.setStyles()
-    }
+    } 1
   }
 
   //all of these just put the correct character onto shotstring
@@ -180,12 +190,17 @@ export default class extends Controller {
 
   //update shots on scoreboard and total
   _updateScores() {
-    this.total = 0
-    for(let i = 0; i < this.length; i++){
-      this.scoreTargets[i].innerText = this.scorelist[i]
-      this.total += this.scorelist[i]
+    let firstsum = 0
+    let secondsum = 0
+    for(let i = 0; i < this.length; i++) {
+      if(i < 9)
+        firstsum += this.scorelist[i]
+      else
+        secondsum += this.scorelist[i]
     }
-    this.totalTarget.innerText = this.total
+    this.firsttotalTarget.innerText = firstsum
+    this.secondtotalTarget.innerText = secondsum
+
     this.shotsoutTarget.innerText = this.shotstring
   }
 
@@ -202,6 +217,8 @@ export default class extends Controller {
     for(let i = 0; i < this.length; i++) {
 
       difference = this.scorelist[i] - this.parlist[i]
+      this.scoreTargets[i].innerText = this.scorelist[i]
+
       if(this.scorelist[i] > 0) {
         switch(difference) {
           case -3:

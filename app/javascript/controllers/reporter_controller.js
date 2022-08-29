@@ -4,9 +4,10 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [ 
     "holepar",
-    "totalpar",
     "score",
-    "total",
+    "length",
+    "firsttotal",
+    "secondtotal",
     "shotstring",
     "circleoneputt",
     "circleonedata",
@@ -35,13 +36,15 @@ export default class extends Controller {
 
   initialize() {
     this.shotstring = this.shotstringTarget.innerText
-    this.scorelist = [0,0,0,0,0,0,0,0,0] //setScores()  setStyles()
+    this.scorelist = [] //setScores()  setStyles()
     this.totalpar = 0 //setPars()
-    this.pars = [] //setPars()  setGreenStats()  setStyles()
+    this.pars = [] //setGreenStats()  setStyles()
     this.shot_array = [] //setScores()
+    this.length = 0
   }
 
   connect() {
+    this.length = parseInt(this.lengthTarget.innerText)
     this.setScores()
     this.setPars()
     this.setStyles()
@@ -53,16 +56,9 @@ export default class extends Controller {
 
   }
 
-  //calculate and fill the total par on connect()
-  setPars() { 
-    this.holeparTargets.forEach(hole => {
-      this.totalpar += parseInt(hole.innerText)
-      this.pars.push(parseInt(hole.innerText))
-    })
-    this.totalparTarget.innerText = this.totalpar
+  setPars() {
+    this.holeparTargets.forEach(element => this.pars.push(parseInt(element.innerText)))
   }
-
-
   //recreate and fill the card scores on connect()
   setScores() { 
     
@@ -89,13 +85,21 @@ export default class extends Controller {
 
     //set innerText for scores per hole and sum/set the total score
     let scorelist_index = 0
-    let score_sum = 0
+    let first_score_sum = 0
+    let second_score_sum = 0
+
+
     this.scoreTargets.forEach(box => {
       box.innerText = this.scorelist[scorelist_index]
-      score_sum += this.scorelist[scorelist_index]
+      if(scorelist_index < 9)
+        first_score_sum += this.scorelist[scorelist_index]
+      else
+        second_score_sum += this.scorelist[scorelist_index]
       scorelist_index++
     });
-    this.totalTarget.innerText = score_sum
+    this.firsttotalTarget.innerText = first_score_sum
+    if(this.length == 18)
+      this.secondtotalTarget.innerText = second_score_sum
   }
 
 
@@ -205,7 +209,7 @@ export default class extends Controller {
 
     this.greendataTarget.innerText = `${greenone.toFixed(0)}`
     this.greendata2Target.innerText = `${greentwo.toFixed(0)}`
-    this.greeninregulationTarget.innerText = `${(((gircount)/9)*100).toFixed(0)}%`
+    this.greeninregulationTarget.innerText = `${(((gircount)/this.length)*100).toFixed(0)}%`
   }
 
   //input: the substring for a hole's strokes and the hole index
@@ -247,9 +251,10 @@ export default class extends Controller {
   setStyles() {
     
     let difference = 0
-    for(let i = 0; i < 9; i++) {
+    for(let i = 0; i < this.length; i++) {
 
       difference = this.scorelist[i] - this.pars[i] //check the over/under on each hole
+      
 
       switch(difference) { //assign the appropriate class for styling
         case -3:
